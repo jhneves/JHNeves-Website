@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#FF801A",
+                        "on-surface": "#1A1A1A",
+                        "on-surface-variant": "#52525B",
+                        "background": "#FFFFFF",
+                        "surface-container": "#F4F4F5",
+                        "outline-variant": "rgba(0, 0, 0, 0.08)",
+                    },
+                    fontFamily: {
+                        "headline": ["Inter"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+                },
+            },
+        }
+    </script>
+<style type="text/tailwindcss">
+        @layer base {
+            body {
+                @apply bg-background text-on-surface;
+                font-family: 'Inter', sans-serif;
+            }
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface">
+<nav class="fixed top-0 w-full z-50 bg-background/90 backdrop-blur-xl border-b border-outline-variant">
+<div class="grid grid-cols-3 items-center max-w-5xl mx-auto px-10 h-16 w-full">
+<div class="text-[20px] font-black tracking-tighter uppercase flex items-center gap-1.5">
+<span class="text-primary">JOÃO</span> <span class="text-on-surface">NEVES</span>
+<span class="w-1.5 h-1.5 bg-primary rounded-full"></span>
+</div>
+<div class="hidden md:flex gap-8 items-center justify-center">
+<a class="font-['Inter'] tracking-tight font-bold uppercase text-[10px] text-on-surface-variant/60 hover:text-primary transition-all duration-300" href="#">Work</a>
+<a class="font-['Inter'] tracking-tight font-bold uppercase text-[10px] text-on-surface-variant/60 hover:text-primary transition-all duration-300" href="#">Archive</a>
+<a class="font-['Inter'] tracking-tight font-bold uppercase text-[10px] text-primary border-b border-primary pb-0.5" href="#">About</a>
+<a class="font-['Inter'] tracking-tight font-bold uppercase text-[10px] text-on-surface-variant/60 hover:text-primary transition-all duration-300" href="#">Contact</a>
+</div>
+<div class="flex justify-end">
+<!-- Reserved for potential CTA or language toggle -->
+</div>
+</div>
+</nav>
+<main class="pt-32 pb-12 max-w-5xl mx-auto px-10">
+<section class="mb-14 mt-8">
+<div class="grid grid-cols-1 md:grid-cols-[auto_1fr] gap-12 items-start">
+<div class="w-auto">
+<img alt="Portrait of João Neves" class="w-64 aspect-square object-cover grayscale opacity-90 hover:grayscale-0 transition-all duration-500 rounded-sm border border-outline-variant" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBP9MgAdd6CPrs7HJn3t44ptZ-MdPCT21aasDg8ftI1e4PXMurs6LmIT3cucQejhgf10CA65vhO00oHFKF1ewH5gqXXO8B_UMCnYMOgDQprOENxXj1PJudmTdymgUN-IhTIGxzffNKx14wOhjBjns1l32gtZFI4cZNNzXZ1wmPA8nB71TGg7SdaVP2eAHSQvH9n3Kwy7EciZ5JF4HbTovkPKOkfxJ0wemqD6JVlHxZ5Ea3GVHHcIJ9fMdFn5OgJOuWJYRAxuDXEr8o"/>
+</div>
+<div class="flex flex-col gap-10">
+<div>
+<h2 class="tracking-tight leading-tight text-lg md:text-xl font-medium text-on-surface-variant">
+                            Hello, I'm João. <span class="text-primary font-semibold">Senior Software Architect</span> specializing in <span class="text-primary font-semibold">Swift</span> and high-performance workflows. Currently crafting the future of computing through minimal, kinetic interfaces and robust systems. Previously at <span class="text-primary font-semibold">The Browser Company</span>, <span class="text-primary font-semibold">Block</span>, and <span class="text-primary font-semibold">Salesforce</span>.
+                        </h2>
+</div>
+<div class="space-y-4">
+<p class="text-primary font-['Inter'] text-[0.6rem] uppercase tracking-widest font-bold">Focus</p>
+<ul class="space-y-2">
+<li class="text-xl font-bold tracking-tight text-on-surface flex items-center gap-2">Applied AI engineer <span class="w-1 h-1 bg-primary rounded-full opacity-40"></span></li>
+<li class="text-xl font-bold tracking-tight text-on-surface flex items-center gap-2">Agentic systems builder <span class="w-1 h-1 bg-primary rounded-full opacity-40"></span></li>
+<li class="text-xl font-bold tracking-tight text-on-surface">iOS, macOS, Swift, product, and systems</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section class="mb-16 border-t border-outline-variant pt-10">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+<div>
+<p class="text-primary font-['Inter'] text-[0.6rem] uppercase tracking-widest font-bold mb-4">Professional work</p>
+</div>
+<div class="col-span-3 space-y-8">
+<div class="group cursor-default">
+<p class="text-[0.6rem] uppercase tracking-widest font-bold text-on-surface-variant mb-1 flex items-center gap-2">The Browser Company <span class="w-1 h-1 bg-primary/40 rounded-full"></span></p>
+<h3 class="text-3xl font-black tracking-tighter group-hover:text-primary transition-colors">ARC &amp; DIA</h3>
+<p class="text-sm text-on-surface-variant mt-2">Swift, AI products development.</p>
+</div>
+<div class="group cursor-default">
+<p class="text-[0.6rem] uppercase tracking-widest font-bold text-on-surface-variant mb-1 flex items-center gap-2">Block <span class="w-1 h-1 bg-primary/40 rounded-full"></span></p>
+<h3 class="text-3xl font-black tracking-tighter group-hover:text-primary transition-colors">CASH APP</h3>
+<p class="text-sm text-on-surface-variant mt-2">Money movement and banking systems architecture.</p>
+</div>
+<div class="group cursor-default">
+<p class="text-[0.6rem] uppercase tracking-widest font-bold text-on-surface-variant mb-1 flex items-center gap-2">Salesforce <span class="w-1 h-1 bg-primary/40 rounded-full"></span></p>
+<h3 class="text-3xl font-black tracking-tighter group-hover:text-primary transition-colors">MOBILE PLATFORM</h3>
+<p class="text-sm text-on-surface-variant mt-2">Flagship mobile app development and platform modernization.</p>
+</div>
+</div>
+</div>
+</section>
+<section class="mb-20 border-t border-outline-variant pt-10">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+<div>
+<p class="text-primary font-['Inter'] text-[0.6rem] uppercase tracking-widest font-bold mb-4">Capabilities</p>
+</div>
+<div class="col-span-3 grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8">
+<div class="border-l-2 border-primary/40 pl-6 py-1">
+<h4 class="text-lg font-bold mb-2">AI &amp; Workflows</h4>
+<p class="text-sm text-on-surface-variant">Al-native product features and agentic workflows built for scale.</p>
+</div>
+<div class="border-l-2 border-outline-variant pl-6 py-1">
+<h4 class="text-lg font-bold mb-2">Apple Software</h4>
+<p class="text-sm text-on-surface-variant">Polished Apple-platform software with strong interaction design principles.</p>
+</div>
+<div class="border-l-2 border-outline-variant pl-6 py-1">
+<h4 class="text-lg font-bold mb-2">Swift Architecture</h4>
+<p class="text-sm text-on-surface-variant">Deep architecture across Swift app layers and lower-level systems.</p>
+</div>
+<div class="border-l-2 border-outline-variant pl-6 py-1">
+<h4 class="text-lg font-bold mb-2">Performance &amp; Tooling</h4>
+<p class="text-sm text-on-surface-variant">Instrumentation, performance work, CI, and advanced developer tooling.</p>
+</div>
+</div>
+</div>
+</section>
+</main>
+<footer class="w-full py-12 px-10 border-t border-outline-variant">
+<div class="flex flex-col md:flex-row justify-between items-center gap-6 max-w-5xl mx-auto">
+<div class="text-on-surface-variant/40 font-black uppercase tracking-widest text-[9px] flex items-center gap-2">
+                © 2024 KINETIC MONOLITH <span class="w-1 h-1 bg-primary rounded-full"></span> ALL RIGHTS RESERVED.
+            </div>
+<div class="flex gap-8">
+<a class="font-['Inter'] text-[9px] uppercase tracking-widest font-bold text-on-surface-variant/80 hover:text-primary transition-colors duration-300" href="#">LinkedIn</a>
+<a class="font-['Inter'] text-[9px] uppercase tracking-widest font-bold text-on-surface-variant/80 hover:text-primary transition-colors duration-300" href="#">GitHub</a>
+<a class="font-['Inter'] text-[9px] uppercase tracking-widest font-bold text-on-surface-variant/80 hover:text-primary transition-colors duration-300" href="#">Twitter</a>
+<a class="font-['Inter'] text-[9px] uppercase tracking-widest font-bold text-primary transition-colors duration-300" href="mailto:joao@engineer.com">Email</a>
+</div>
+</div>
+</footer>
+</body></html>

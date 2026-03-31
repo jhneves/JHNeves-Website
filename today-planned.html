@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light dark" />
+    <title>Today Planned | João Neves</title>
+    <meta name="description" content="Case study for the Today Planned app." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <script defer src="script.js"></script>
+  </head>
+  <body data-nav="archive">
+    <header class="site-header" data-site-header></header>
+
+    <main class="detail-page">
+      <div class="detail-shell">
+        <div class="breadcrumb">
+          <a href="products.html">Back to Products</a>
+        </div>
+
+        <header class="detail-hero">
+          <h1>Today Planned — calm planning workflows<span class="intro-accent">.</span></h1>
+        </header>
+
+        <section class="meta-grid">
+          <div class="meta-column">
+            <div class="meta-block">
+              <h4>Role</h4>
+              <p>Independent builder</p>
+            </div>
+            <div class="meta-block">
+              <h4>Platform</h4>
+              <p class="platform-icons" aria-label="iPhone and Apple Watch">
+                <svg class="platform-icon" aria-hidden="true"><use href="assets/platform-icons.svg#iphone"></use></svg>
+                <svg class="platform-icon" aria-hidden="true"><use href="assets/platform-icons.svg#watch"></use></svg>
+              </p>
+            </div>
+          </div>
+          <div class="meta-column">
+            <div class="meta-block">
+              <h4>Tech stack</h4>
+              <ul class="tag-list">
+                <li>SwiftUI</li>
+                <li>Apple Platforms</li>
+                <li>Product Design</li>
+              </ul>
+            </div>
+            <div class="meta-block">
+              <h4>Key outcome</h4>
+              <p>Shipped a planning product centered on intentional structure rather than noisy productivity tropes.</p>
+            </div>
+          </div>
+        </section>
+
+        <article class="detail-article">
+          <section class="detail-row">
+            <div class="detail-rail">
+              <p>The vision</p>
+            </div>
+            <div class="detail-copy">
+              <p class="detail-lead">
+                The goal was a planning tool that felt calm, opinionated, and
+                useful without becoming heavy.
+              </p>
+              <p>
+                Many planning apps are either overly rigid or visually noisy.
+                Today Planned was built around the idea that daily planning
+                should reduce cognitive load, not add to it.
+              </p>
+              <p>
+                That drove both the product structure and the interface tone:
+                fewer decisions, clearer hierarchy, and a more legible sense of
+                what matters today.
+              </p>
+            </div>
+          </section>
+
+          <figure class="showcase-figure">
+            <div class="showcase-panel showcase-planning">
+              <div class="panel-header">
+                <span>Today</span>
+                <span>Priority</span>
+                <span>Focus</span>
+              </div>
+              <div class="panel-body">
+                <div class="task-row"></div>
+                <div class="task-row wide"></div>
+                <div class="task-row"></div>
+              </div>
+            </div>
+            <figcaption>Fig 01. A stripped-back planning surface designed to support attention, not clutter it.</figcaption>
+          </figure>
+
+          <section class="detail-row detail-row-reverse">
+            <div class="detail-rail">
+              <p>The execution</p>
+            </div>
+            <div class="detail-copy">
+              <div class="numbered-steps">
+                <article>
+                  <span>01</span>
+                  <div>
+                    <h3>Intentional hierarchy</h3>
+                    <p>Built the information model around clarity of today’s work rather than feature sprawl.</p>
+                  </div>
+                </article>
+                <article>
+                  <span>02</span>
+                  <div>
+                    <h3>Apple-native design</h3>
+                    <p>Used SwiftUI to build an interface that feels quiet, immediate, and platform-appropriate.</p>
+                  </div>
+                </article>
+                <article>
+                  <span>03</span>
+                  <div>
+                    <h3>Cross-device continuity</h3>
+                    <p>Extended the same planning philosophy across iPhone and watch without bloating the experience.</p>
+                  </div>
+                </article>
+              </div>
+            </div>
+          </section>
+
+          <div class="dual-panel">
+            <figure>
+              <div class="mini-panel">
+                <strong>Daily view</strong>
+                <p>The interface foregrounds the next action instead of the whole backlog.</p>
+              </div>
+              <figcaption>Fig 02. Restraint used as a product feature.</figcaption>
+            </figure>
+            <figure>
+              <div class="mini-panel">
+                <strong>Watch support</strong>
+                <p>Quick access and continuity without trying to mirror the full iPhone app.</p>
+              </div>
+              <figcaption>Fig 03. Platform scope kept tight enough to stay useful.</figcaption>
+            </figure>
+          </div>
+
+          <section class="next-project">
+            <p>Next project</p>
+            <a href="save-lala-again.html">Save LaLa Again — cross-platform indie game</a>
+          </section>
+        </article>
+      </div>
+    </main>
+
+    <footer class="detail-footer">
+      <div class="wide-shell detail-footer-inner">
+        <p>© 2026 João Neves. All rights reserved.</p>
+        <div>
+          <a href="products.html">Products</a>
+          <a href="index.html">Home</a>
+          <a href="mailto:jhneves@me.com">Email</a>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

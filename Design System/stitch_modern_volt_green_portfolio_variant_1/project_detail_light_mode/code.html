@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface": "#ffffff",
+              "secondary-fixed": "#e5e2e1",
+              "error-container": "#b92902",
+              "surface-tint": "#FF6B00",
+              "primary-fixed-dim": "#ee7304",
+              "on-background": "#0e0e0e",
+              "tertiary-fixed": "#ff9560",
+              "surface-container-highest": "#e5e5e5",
+              "primary-fixed": "#FF6B00",
+              "surface-dim": "#f5f5f5",
+              "inverse-primary": "#994800",
+              "surface-container": "#f9f9f9",
+              "background": "#ffffff",
+              "tertiary-container": "#fe6b00",
+              "surface-container-high": "#ebebeb",
+              "on-primary-container": "#3d1800",
+              "tertiary-fixed-dim": "#ff7f39",
+              "on-primary-fixed": "#010000",
+              "on-surface-variant": "#5c5b5b",
+              "primary": "#FF6B00",
+              "on-secondary-container": "#403f3f",
+              "on-secondary-fixed": "#403f3f",
+              "tertiary-dim": "#ff7524",
+              "secondary": "#474746",
+              "on-surface": "#0e0e0e",
+              "on-error-container": "#ffd2c8",
+              "surface-container-low": "#fafafa",
+              "outline-variant": "#e0e0e0",
+              "on-primary": "#ffffff",
+              "primary-dim": "#f87b12",
+              "secondary-dim": "#d6d4d3",
+              "secondary-fixed-dim": "#d6d4d3",
+              "secondary-container": "#f2f2f2",
+              "outline": "#767575",
+              "error-dim": "#d53d18",
+              "on-tertiary": "#ffffff",
+              "on-tertiary-container": "#330f00",
+              "surface-bright": "#ffffff",
+              "inverse-on-surface": "#f5f5f5",
+              "on-error": "#ffffff",
+              "error": "#ff7351",
+              "on-primary-fixed-variant": "#4f2200",
+              "primary-container": "#fb7d16",
+              "on-tertiary-fixed": "#2f0e00",
+              "on-secondary-fixed-variant": "#5c5b5b",
+              "surface-container-lowest": "#ffffff",
+              "on-tertiary-fixed-variant": "#652600",
+              "tertiary": "#ff8342",
+              "surface-variant": "#f2f2f2",
+              "inverse-surface": "#0e0e0e",
+              "on-secondary": "#ffffff"
+            },
+            fontFamily: {
+              "headline": ["Inter"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      .hide-scrollbar::-webkit-scrollbar { display: none; }
+      .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body selection:bg-primary selection:text-on-primary">
+<!-- Header / Navigation Shell (Based on JSON) -->
+<header class="fixed top-0 w-full z-50 bg-white/70 backdrop-blur-xl">
+<nav class="flex justify-between items-center px-8 py-6 max-w-[1920px] mx-auto">
+<div class="flex items-center group">
+<span class="text-xl font-black tracking-tighter uppercase text-primary">JOÃO</span>
+<span class="text-xl font-black tracking-tighter uppercase text-on-surface ml-1.5">NEVES</span>
+</div>
+<div class="hidden md:flex items-center space-x-12">
+<a class="font-['Inter'] font-bold tracking-tighter uppercase text-sm text-primary border-b-2 border-primary pb-1" href="#">WORK</a>
+<a class="font-['Inter'] font-bold tracking-tighter uppercase text-sm text-on-surface/60 hover:text-on-surface transition-colors" href="#">ABOUT</a>
+<a class="font-['Inter'] font-bold tracking-tighter uppercase text-sm text-on-surface/60 hover:text-on-surface transition-colors" href="#">CONTACT</a>
+</div>
+<button class="material-symbols-outlined text-on-surface hover:text-primary transition-all duration-300 scale-95 active:scale-90" data-icon="menu">menu</button>
+</nav>
+</header>
+<main class="pt-32 pb-24">
+<div class="max-w-[1000px] mx-auto px-6">
+<!-- Breadcrumb -->
+<div class="mb-12">
+<a class="flex items-center gap-2 text-[0.6875rem] uppercase tracking-[0.1em] font-bold text-on-surface/40 hover:text-primary transition-colors group" href="#">
+<span class="material-symbols-outlined text-sm" data-icon="arrow_back">arrow_back</span>
+                    Back to Work
+                </a>
+</div>
+<!-- Project Title -->
+<div class="mb-20">
+<h1 class="text-[clamp(3rem,8vw,5.5rem)] leading-[0.9] font-black tracking-tighter uppercase text-on-surface">
+                    Arc &amp; Dia — AI-Native Workflows<span class="text-primary">.</span>
+</h1>
+</div>
+<!-- Metadata Grid -->
+<section class="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-12 mb-32 py-12 border-t border-outline-variant/30">
+<div class="space-y-8">
+<div>
+<span class="block text-[0.6875rem] uppercase tracking-[0.15em] font-bold text-primary mb-3">Role</span>
+<p class="text-xl font-medium text-on-surface">Principal Product Designer</p>
+</div>
+<div>
+<span class="block text-[0.6875rem] uppercase tracking-[0.15em] font-bold text-primary mb-3">Date</span>
+<p class="text-xl font-medium text-on-surface">Q3 2023 — Present</p>
+</div>
+</div>
+<div class="space-y-8">
+<div>
+<span class="block text-[0.6875rem] uppercase tracking-[0.15em] font-bold text-primary mb-3">Tech Stack</span>
+<div class="flex flex-wrap gap-2 mt-2">
+<span class="px-3 py-1 bg-surface-container text-xs font-bold uppercase tracking-wider rounded-full">React</span>
+<span class="px-3 py-1 bg-surface-container text-xs font-bold uppercase tracking-wider rounded-full">Python</span>
+<span class="px-3 py-1 bg-surface-container text-xs font-bold uppercase tracking-wider rounded-full">OpenAI</span>
+<span class="px-3 py-1 bg-surface-container text-xs font-bold uppercase tracking-wider rounded-full">Tailwind</span>
+</div>
+</div>
+<div>
+<span class="block text-[0.6875rem] uppercase tracking-[0.15em] font-bold text-primary mb-3">Key Achievement</span>
+<p class="text-xl font-medium text-on-surface">Reduced workflow latency by 45% through predictive UI modeling.</p>
+</div>
+</div>
+</section>
+<!-- Main Case Study Content -->
+<article class="space-y-24">
+<!-- Intro Section -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-8">
+<div class="md:col-span-4">
+<h2 class="text-sm font-black uppercase tracking-[0.2em] text-on-surface/30 sticky top-32">The Vision</h2>
+</div>
+<div class="md:col-span-8">
+<p class="text-2xl md:text-3xl font-medium leading-tight text-on-surface mb-8">
+                            Creating a seamless bridge between human intuition and machine intelligence required a total rethink of the traditional canvas-based workflow.
+                        </p>
+<div class="space-y-6 text-on-surface/70 text-lg leading-relaxed">
+<p>
+                                Arc &amp; Dia was born from the frustration of context-switching. Professionals today spend 40% of their time managing tools rather than executing vision. Our goal was to build an environment where the interface disappears, leaving only the creative intent.
+                            </p>
+<p>
+                                By leveraging large language models at the core of the interaction layer, we developed a "Kinetic Interface" that anticipates the next logical step in a user's journey, surfacing tools exactly when they are needed.
+                            </p>
+</div>
+</div>
+</div>
+<!-- Visual 1: Full Width -->
+<figure class="group">
+<div class="w-full aspect-[16/9] overflow-hidden bg-surface-container-high rounded-xl">
+<img alt="AI Workflow Dashboard" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="Modern minimalist digital dashboard interface with sleek glassmorphism panels, vibrant orange accents, and dark high-contrast typography in a bright studio setting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAMsyk3OqPHXOTFZM7-9mckfB0bRmDbnwm7rA0zzkZumDZHeBJE5VqVPx3Go7XBOQtGetXWvGw4dSM4MugVTiXvC4gX9tcc9hWsOJlj4aUYvzfY2dSKpUtHDKneqN_iKicPAudCeybuHC7C6rsvEP5bc8XoJeEE0Q_wZ_iEJFam_Wb0DP6uAPf1fHOr0pP4x-xkARQqqDKHFAK2d33lHBO9LV-x1baDnFsqOs8TIiWxnw2zvmcIcN4QQd_VYClAxX8mwLm582od5KI"/>
+</div>
+<figcaption class="mt-6 flex items-start gap-4">
+<span class="w-8 h-[1px] bg-primary mt-3"></span>
+<p class="text-[0.6875rem] uppercase tracking-widest font-bold text-on-surface/50">Fig 01. The Central Command Interface with real-time predictive node mapping.</p>
+</figcaption>
+</figure>
+<!-- Detailed Text Block -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-8">
+<div class="md:col-span-4">
+<h2 class="text-sm font-black uppercase tracking-[0.2em] text-on-surface/30 sticky top-32">The Process</h2>
+</div>
+<div class="md:col-span-8">
+<ul class="space-y-12">
+<li class="relative pl-8">
+<span class="absolute left-0 top-2 w-2 h-2 rounded-full bg-primary"></span>
+<h3 class="text-xl font-bold uppercase tracking-tight mb-2">01. Discovery &amp; Synthesis</h3>
+<p class="text-on-surface/70 leading-relaxed">We interviewed 50+ creative directors to understand the 'flow state' and where it breaks. The consistent theme was the 'friction of navigation'.</p>
+</li>
+<li class="relative pl-8">
+<span class="absolute left-0 top-2 w-2 h-2 rounded-full bg-primary"></span>
+<h3 class="text-xl font-bold uppercase tracking-tight mb-2">02. Atomic Intelligence</h3>
+<p class="text-on-surface/70 leading-relaxed">Unlike traditional design systems, we built an 'Atomic Intelligence' system where every component has an awareness of its context and relationships to other data points.</p>
+</li>
+<li class="relative pl-8">
+<span class="absolute left-0 top-2 w-2 h-2 rounded-full bg-primary"></span>
+<h3 class="text-xl font-bold uppercase tracking-tight mb-2">03. User Testing &amp; Refinement</h3>
+<p class="text-on-surface/70 leading-relaxed">Iterating through 14 high-fidelity prototypes, we focused on the haptic feedback and micro-interactions that make the AI feel responsive rather than prescriptive.</p>
+</li>
+</ul>
+</div>
+</div>
+<!-- Visual 2: Side-by-Side -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<figure class="group">
+<div class="w-full aspect-square overflow-hidden bg-surface-container-low rounded-xl">
+<img alt="Tech hardware detail" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="Extreme close-up of a premium matte black keyboard with a single glowing orange key, soft daylight from a nearby window." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD9cdhQ5HH19nK8u9-encEEhORZnH6tcF2RwFF8K2JD3_I70WAoFbNJw8cXSsD1VORvTmI8o4oClvd0lywQDd9_MDEeoKjC9L3fXEZtW3fskRBVycE-qMCzXlKQPzXAbY-eMz5It9YIBwSKJjNvpZAL6fbB_O4VBtW0k8tqQVaJY2YIbNg4gmChdidmhJ6TL5rcP42n3kohHDhr6Mm3Kb8Bh-os7I75IkKnHhO-X_Miqzj7V8xBPQC7f0vzdkEEMXItj2Z8V8p6S4c"/>
+</div>
+<figcaption class="mt-4 text-[0.6875rem] uppercase tracking-widest font-bold text-on-surface/40">Visualizing the hardware-software tactile connection.</figcaption>
+</figure>
+<figure class="group">
+<div class="w-full aspect-square overflow-hidden bg-surface-container-low rounded-xl">
+<img alt="Abstract digital flow" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="Abstract 3D render of flowing orange liquid crystal structures against a pure white background, minimal and futuristic aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBmQXsFH2HPlO5klJSsjPpBmD8Q8Ky7dEeuSsQmE9y23DRvrGtDKxEl508o6C5KMprslaYE23DznosGQ6r22CpD4SZsEsQj2cHFJfxvLRZPmHj4kVlF4Jj_Rm2B49sCCKOPRQ6n8pu2XgDjBQro61qs4ZUQpyNNkX4tBJynVNnLoeozT46xjoWc60SxNjC-tgxIz86XFOo3EO4Hy_5XFhF0-hdZ1WVt1uig2669YI8XasXBqzdCW8-qKsvoqwqpCMDwBw8QTxLo4Dk"/>
+</div>
+<figcaption class="mt-4 text-[0.6875rem] uppercase tracking-widest font-bold text-on-surface/40">Conceptual representation of fluid AI data streams.</figcaption>
+</figure>
+</div>
+<!-- Conclusion / CTA -->
+<div class="py-24 border-t border-outline-variant/30 text-center">
+<p class="text-sm font-black uppercase tracking-[0.3em] text-primary mb-8">Next Project</p>
+<a class="group inline-block" href="#">
+<h2 class="text-4xl md:text-6xl font-black uppercase tracking-tighter text-on-surface group-hover:text-primary transition-colors duration-300">
+                            Lumina — Spatial OS
+                        </h2>
+<div class="mt-6 flex justify-center items-center gap-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+<span class="text-sm font-bold uppercase tracking-widest">View Case Study</span>
+<span class="material-symbols-outlined" data-icon="east">east</span>
+</div>
+</a>
+</div>
+</article>
+</div>
+</main>
+<!-- Footer Shell (Based on JSON) -->
+<footer class="w-full border-t border-on-surface/5 bg-surface py-12">
+<div class="max-w-[1920px] mx-auto px-8 flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+<p class="font-['Inter'] text-[0.6875rem] uppercase tracking-[0.05em] font-medium text-on-surface/40">
+                © 2024 JOÃO NEVES. ALL RIGHTS RESERVED.
+            </p>
+<div class="flex items-center space-x-8">
+<a class="font-['Inter'] text-[0.6875rem] uppercase tracking-[0.05em] font-medium text-on-surface/40 hover:text-primary transition-colors" href="#">INSTAGRAM</a>
+<a class="font-['Inter'] text-[0.6875rem] uppercase tracking-[0.05em] font-medium text-on-surface/40 hover:text-primary transition-colors" href="#">BEHANCE</a>
+<a class="font-['Inter'] text-[0.6875rem] uppercase tracking-[0.05em] font-medium text-on-surface/40 hover:text-primary transition-colors" href="#">LINKEDIN</a>
+</div>
+</div>
+</footer>
+</body></html>

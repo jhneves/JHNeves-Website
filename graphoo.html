@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light dark" />
+    <title>Graphoo | João Neves</title>
+    <meta name="description" content="Case study for Graphoo." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <script defer src="script.js"></script>
+  </head>
+  <body data-nav="archive">
+    <header class="site-header" data-site-header></header>
+
+    <main class="detail-page">
+      <div class="detail-shell">
+        <div class="breadcrumb">
+          <a href="products.html">Back to Products</a>
+        </div>
+
+        <header class="detail-hero">
+          <h1>Graphoo — algorithmic mobile interfaces<span class="intro-accent">.</span></h1>
+        </header>
+
+        <section class="meta-grid">
+          <div class="meta-column">
+            <div class="meta-block">
+              <h4>Role</h4>
+              <p>Independent builder</p>
+            </div>
+            <div class="meta-block">
+              <h4>Platform</h4>
+              <p class="platform-icons" aria-label="iPhone">
+                <svg class="platform-icon" aria-hidden="true"><use href="assets/platform-icons.svg#iphone"></use></svg>
+              </p>
+            </div>
+          </div>
+          <div class="meta-column">
+            <div class="meta-block">
+              <h4>Tech stack</h4>
+              <ul class="tag-list">
+                <li>Objective-C</li>
+                <li>Dijkstra</li>
+                <li>Graph Logic</li>
+              </ul>
+            </div>
+            <div class="meta-block">
+              <h4>Key outcome</h4>
+              <p>Reached #1 on the App Store in Brazil with an algorithm-heavy product.</p>
+            </div>
+          </div>
+        </section>
+
+        <article class="detail-article">
+          <section class="detail-row">
+            <div class="detail-rail">
+              <p>The vision</p>
+            </div>
+            <div class="detail-copy">
+              <p class="detail-lead">
+                Graphoo combined algorithmic rigor with a mobile interface simple
+                enough to stay approachable.
+              </p>
+              <p>
+                Projects with deeper computational logic often become difficult
+                to present well. The challenge was to make complex pathfinding
+                and graph reasoning feel comprehensible in a handheld product.
+              </p>
+              <p>
+                That meant shaping the product around legibility and response,
+                not only around correctness.
+              </p>
+            </div>
+          </section>
+
+          <figure class="showcase-figure">
+            <div class="showcase-panel showcase-graph">
+              <div class="panel-body graph-body">
+                <div class="graph-node graph-node-a"></div>
+                <div class="graph-node graph-node-b"></div>
+                <div class="graph-node graph-node-c"></div>
+                <div class="graph-link graph-link-a"></div>
+                <div class="graph-link graph-link-b"></div>
+              </div>
+            </div>
+            <figcaption>Fig 01. Abstracted graph interactions translated into a product surface users could follow.</figcaption>
+          </figure>
+
+          <section class="detail-row detail-row-reverse">
+            <div class="detail-rail">
+              <p>The execution</p>
+            </div>
+            <div class="detail-copy">
+              <div class="numbered-steps">
+                <article>
+                  <span>01</span>
+                  <div>
+                    <h3>Algorithmic core</h3>
+                    <p>Used Dijkstra-based logic as a product primitive rather than a hidden implementation detail.</p>
+                  </div>
+                </article>
+                <article>
+                  <span>02</span>
+                  <div>
+                    <h3>Interface clarity</h3>
+                    <p>Kept the presentation legible enough that the logic felt empowering rather than opaque.</p>
+                  </div>
+                </article>
+                <article>
+                  <span>03</span>
+                  <div>
+                    <h3>Market response</h3>
+                    <p>The app reached #1 in Brazil, showing that dense technical products can still resonate broadly.</p>
+                  </div>
+                </article>
+              </div>
+            </div>
+          </section>
+
+          <div class="dual-panel">
+            <figure>
+              <div class="mini-panel">
+                <strong>Logic</strong>
+                <p>The core value came from solving a real reasoning problem cleanly.</p>
+              </div>
+              <figcaption>Fig 02. Technical depth became part of the product identity.</figcaption>
+            </figure>
+            <figure>
+              <div class="mini-panel">
+                <strong>Reach</strong>
+                <p>Clear positioning and usability helped the app travel beyond a narrow expert audience.</p>
+              </div>
+              <figcaption>Fig 03. Complexity translated into a simple outcome for users.</figcaption>
+            </figure>
+          </div>
+
+          <section class="next-project">
+            <p>Next project</p>
+            <a href="arc-dia.html">Arc &amp; Dia — AI-native browser workflows</a>
+          </section>
+        </article>
+      </div>
+    </main>
+
+    <footer class="detail-footer">
+      <div class="wide-shell detail-footer-inner">
+        <p>© 2026 João Neves. All rights reserved.</p>
+        <div>
+          <a href="products.html">Products</a>
+          <a href="index.html">Home</a>
+          <a href="mailto:jhneves@me.com">Email</a>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
