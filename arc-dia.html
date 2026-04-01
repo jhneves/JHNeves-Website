@@ -5,7 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="color-scheme" content="light dark" />
     <title>Arc &amp; Dia | João Neves</title>
-    <meta name="description" content="Detail page for Arc and Dia." />
+    <meta
+      name="description"
+      content="Browser product work across Arc desktop and Dia, spanning AI-native features, Swift surfaces, Chromium bridges, and performance instrumentation."
+    />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -19,13 +22,11 @@
     <header class="site-header" data-site-header></header>
 
     <main class="shell page-main project-page">
-      <a class="project-back" href="work.html">Back to Work</a>
-
       <header class="project-header">
-        <p class="project-kicker">Work</p>
         <h1 class="project-title">Arc &amp; Dia</h1>
         <p class="project-summary">
-          Browser work where AI features, interaction design, and systems engineering had to feel like one product.
+          Desktop browser work across Arc and Dia, spanning Swift UI,
+          Chromium integration, prompts, and performance tooling.
         </p>
         <p class="project-meta">
           <span>The Browser Company</span>
@@ -34,53 +35,93 @@
           <span class="compact-hyphen" aria-hidden="true">-</span>
           <span>2024-2026</span>
         </p>
+        <div class="project-actions">
+          <a href="https://arc.net/" target="_blank" rel="noreferrer">Arc</a>
+          <a href="https://www.diabrowser.com/" target="_blank" rel="noreferrer">Dia</a>
+        </div>
       </header>
 
-      <section class="project-gallery two-up">
+      <section class="project-gallery">
         <figure class="project-shot">
-          <div class="project-frame placeholder wide">
-            <strong>Browser Surface</strong>
-            <span>Placeholder for the product surface. The underlying work is public in spirit but the UI captures are not mine to publish here directly.</span>
+          <div class="project-frame">
+            <img
+              src="https://arc.net/_next/image?url=%2Fzero-chrome.png&amp;w=1920&amp;q=100"
+              alt="Arc desktop screenshot showing the browser layout"
+              loading="lazy"
+              decoding="async"
+            />
           </div>
-          <figcaption>Private Surface</figcaption>
+          <figcaption>Arc</figcaption>
         </figure>
         <figure class="project-shot">
-          <div class="project-frame placeholder wide">
-            <strong>Instrumentation</strong>
-            <span>Placeholder for the performance and debugging tooling that supported the product work behind the scenes.</span>
+          <div class="project-frame">
+            <img
+              src="https://arc.net/_next/image?url=%2Fspace-swiping.png&amp;w=1920&amp;q=100"
+              alt="Arc desktop screenshot showing spaces and organization"
+              loading="lazy"
+              decoding="async"
+            />
           </div>
-          <figcaption>Internal Tooling</figcaption>
+          <figcaption>Arc</figcaption>
+        </figure>
+        <figure class="project-shot">
+          <div class="project-frame">
+            <img
+              src="https://cdn.sanity.io/images/e5fj2khm/production/b04142c9c497f827215ce0576354f7fac5cb5ab8-2400x1260.png?auto=format&amp;q=100&amp;w=1600"
+              alt="Dia browser hero image showing the product interface"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+          <figcaption>Dia</figcaption>
         </figure>
       </section>
 
       <section class="project-sections">
         <section class="project-section">
-          <p class="project-kicker">Overview</p>
+          <p class="project-kicker">Arc</p>
           <div class="project-prose">
             <p>
-              The work across Arc and Dia sat right at the boundary between product
-              behavior and lower-level systems. The challenge was not just to add AI
-              capabilities, but to make them feel native to the browser instead of
-              bolted on top of it.
+              On Arc desktop I worked on browser features that sat close to both
+              the user surface and the browser stack. The work spanned Swift UI,
+              Chromium-facing integration, and the debugging needed to keep the
+              product fast and stable.
             </p>
             <p>
-              That meant connecting prompt behavior, browser context, Swift UI, and
-              Chromium internals into something that felt cohesive, fast, and trustworthy.
+              A lot of the job was making new behavior feel native to the browser
+              rather than layered on top of it.
             </p>
           </div>
         </section>
 
         <section class="project-section">
-          <p class="project-kicker">What I Focused On</p>
+          <p class="project-kicker">Dia</p>
           <div class="project-prose">
             <p>
-              I worked on AI-driven browser features, polished product surfaces in Swift,
-              architectural bridges into Chromium, and the instrumentation needed to
-              understand where product performance was holding up or falling apart.
+              On Dia I worked on early product work around contextual AI in the
+              browser. That meant connecting tab context, prompt behavior, and
+              native UI into something that still felt clear and fast.
+            </p>
+            <p>
+              The interesting part was not just the prompt layer. It was making
+              the whole interaction hold together across product design, client
+              behavior, and browser architecture.
+            </p>
+          </div>
+        </section>
+
+        <section class="project-section">
+          <p class="project-kicker">Role</p>
+          <div class="project-prose">
+            <p>
+              My role cut across product surfaces and supporting systems:
+              shipping UI in Swift, working through Chromium integration points,
+              and improving instrumentation when regressions or performance
+              issues showed up.
             </p>
             <p>
               It is some of the clearest product-systems work in the portfolio:
-              UX, prompts, performance, and platform engineering all needing to move together.
+              browser UX, prompts, and client performance all needing to move together.
             </p>
           </div>
         </section>
@@ -96,11 +137,6 @@
             <li>#browser-architecture</li>
           </ul>
         </section>
-      </section>
-
-      <section class="next-project">
-        <p>Next project</p>
-        <a href="cash-app.html">Cash App</a>
       </section>
     </main>
   </body>
