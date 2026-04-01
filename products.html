@@ -21,61 +21,144 @@
   <body data-nav="archive">
     <header class="site-header" data-site-header></header>
 
-    <main class="shell page-main overview-page">
-      <section class="overview-hero">
-        <p class="overview-kicker">Products</p>
-        <h1>Independent products that show how I think about software, interaction, and shipping.</h1>
-        <p>
-          These projects are where I test taste, product judgment, algorithms,
-          and platform decisions without the insulation of a larger company.
-        </p>
-      </section>
+    <main class="shell page-main overview-simple-page">
+      <section class="section-block section-block-overview">
+        <p class="section-label section-inline-link">Products</p>
+        <div class="overview-entries">
+          <a class="overview-entry" id="today-planned" href="today-planned.html">
+            <div class="compact-item">
+              <span class="compact-item-title">Today Planned</span>
+              <span class="compact-hyphen" aria-hidden="true">-</span>
+              <span class="compact-item-meta compact-item-storeline">
+                APPSTORE
+                <span class="platform-icons compact-meta-icons" aria-hidden="true">
+                  <svg class="platform-icon" aria-hidden="true"><use href="assets/platform-icons.svg#iphone"></use></svg>
+                  <svg class="platform-icon" aria-hidden="true"><use href="assets/platform-icons.svg#watch"></use></svg>
+                </span>
+              </span>
+            </div>
+            <div class="overview-detail">
+              <p>
+                A planning app built around calmer execution, clearer workflows,
+                and deliberate product choices. It is where I push hardest on
+                interaction design, local-first thinking, and product feel.
+              </p>
+              <div class="overview-tags" aria-label="Keywords">
+                <span>#swiftui</span>
+                <span>#watchos</span>
+                <span>#calendar</span>
+                <span>#product-design</span>
+              </div>
+            </div>
+          </a>
 
-      <section class="overview-list">
-        <a class="work-item" id="today-planned" href="today-planned.html">
-          <div class="item-kicker platform-icons" aria-label="iPhone and Apple Watch">
-            <svg class="platform-icon" aria-hidden="true"><use href="assets/platform-icons.svg#iphone"></use></svg>
-            <svg class="platform-icon" aria-hidden="true"><use href="assets/platform-icons.svg#watch"></use></svg>
-          </div>
-          <h2>Today Planned</h2>
-          <p class="item-copy">An opinionated planning app built around calmer execution, clearer workflows, and deliberate product choices.</p>
-        </a>
+          <a class="overview-entry" id="save-lala-again" href="save-lala-again.html">
+            <div class="compact-item">
+              <span class="compact-item-title">Save LaLa Again</span>
+              <span class="compact-hyphen" aria-hidden="true">-</span>
+              <span class="compact-item-meta compact-item-storeline">
+                APPSTORE
+                <span class="platform-icons compact-meta-icons" aria-hidden="true">
+                  <svg class="platform-icon" aria-hidden="true"><use href="assets/platform-icons.svg#iphone"></use></svg>
+                  <svg class="platform-icon" aria-hidden="true"><use href="assets/platform-icons.svg#ipad"></use></svg>
+                  <svg class="platform-icon" aria-hidden="true"><use href="assets/platform-icons.svg#mac"></use></svg>
+                  <svg class="platform-icon" aria-hidden="true"><use href="assets/platform-icons.svg#tv"></use></svg>
+                </span>
+              </span>
+            </div>
+            <div class="overview-detail">
+              <p>
+                A cross-platform game project focused on mechanics, feel, and
+                playful interaction design across Apple devices. It let me work
+                close to the metal on gameplay and polish.
+              </p>
+              <div class="overview-tags" aria-label="Keywords">
+                <span>#c++</span>
+                <span>#box2d</span>
+                <span>#games</span>
+                <span>#cross-platform</span>
+              </div>
+            </div>
+          </a>
 
-        <a class="work-item" id="save-lala-again" href="save-lala-again.html">
-          <div class="item-kicker platform-icons" aria-label="iPhone, iPad, Mac, and Apple TV">
-            <svg class="platform-icon" aria-hidden="true"><use href="assets/platform-icons.svg#iphone"></use></svg>
-            <svg class="platform-icon" aria-hidden="true"><use href="assets/platform-icons.svg#ipad"></use></svg>
-            <svg class="platform-icon" aria-hidden="true"><use href="assets/platform-icons.svg#mac"></use></svg>
-            <svg class="platform-icon" aria-hidden="true"><use href="assets/platform-icons.svg#tv"></use></svg>
-          </div>
-          <h2>Save LaLa Again</h2>
-          <p class="item-copy">A cross-platform game project exploring mechanics, feel, and playful interaction design.</p>
-        </a>
+          <a class="overview-entry" id="super-pipe-bird" href="super-pipe-bird.html">
+            <div class="compact-item">
+              <span class="compact-item-title">Super Pipe Bird</span>
+              <span class="compact-hyphen" aria-hidden="true">-</span>
+              <span class="compact-item-meta compact-item-storeline">
+                APPSTORE
+                <span class="platform-icons compact-meta-icons" aria-hidden="true">
+                  <svg class="platform-icon" aria-hidden="true"><use href="assets/platform-icons.svg#iphone"></use></svg>
+                  <svg class="platform-icon" aria-hidden="true"><use href="assets/platform-icons.svg#ipad"></use></svg>
+                </span>
+              </span>
+            </div>
+            <div class="overview-detail">
+              <p>
+                An earlier App Store release for iPhone and iPad, built as a
+                compact product with simple rules, tight feedback loops, and a
+                clear gameplay premise.
+              </p>
+              <div class="overview-tags" aria-label="Keywords">
+                <span>#games</span>
+                <span>#iphone</span>
+                <span>#ipad</span>
+                <span>#app-store</span>
+              </div>
+            </div>
+          </a>
 
-        <article class="work-item" id="super-pipe-bird">
-          <div class="item-kicker platform-icons" aria-label="iPhone and iPad">
-            <svg class="platform-icon" aria-hidden="true"><use href="assets/platform-icons.svg#iphone"></use></svg>
-            <svg class="platform-icon" aria-hidden="true"><use href="assets/platform-icons.svg#ipad"></use></svg>
-          </div>
-          <h2>Super Pipe Bird</h2>
-          <p class="item-copy">An independent App Store release for iPhone and iPad from earlier product work.</p>
-        </article>
+          <a class="overview-entry" id="upark" href="upark.html">
+            <div class="compact-item">
+              <span class="compact-item-title">upark</span>
+              <span class="compact-hyphen" aria-hidden="true">-</span>
+              <span class="compact-item-meta compact-item-storeline">
+                APPSTORE
+                <span class="platform-icons compact-meta-icons" aria-hidden="true">
+                  <svg class="platform-icon" aria-hidden="true"><use href="assets/platform-icons.svg#iphone"></use></svg>
+                </span>
+              </span>
+            </div>
+            <div class="overview-detail">
+              <p>
+                An independent iPhone utility built around a narrow everyday use
+                case. A smaller product, but one that taught a lot about focus,
+                usefulness, and shipping constraints.
+              </p>
+              <div class="overview-tags" aria-label="Keywords">
+                <span>#iphone</span>
+                <span>#utility</span>
+                <span>#indie</span>
+              </div>
+            </div>
+          </a>
 
-        <article class="work-item" id="upark">
-          <div class="item-kicker platform-icons" aria-label="iPhone">
-            <svg class="platform-icon" aria-hidden="true"><use href="assets/platform-icons.svg#iphone"></use></svg>
-          </div>
-          <h2>upark</h2>
-          <p class="item-copy">An independent iPhone app focused on a practical everyday use case. No longer available.</p>
-        </article>
-
-        <a class="work-item" id="graphoo" href="graphoo.html">
-          <div class="item-kicker platform-icons" aria-label="iPhone">
-            <svg class="platform-icon" aria-hidden="true"><use href="assets/platform-icons.svg#iphone"></use></svg>
-          </div>
-          <h2>Graphoo</h2>
-          <p class="item-copy">An algorithm-heavy iPhone app that reached #1 on the App Store in Brazil. No longer available.</p>
-        </a>
+          <a class="overview-entry" id="graphoo" href="graphoo.html">
+            <div class="compact-item">
+              <span class="compact-item-title">Graphoo</span>
+              <span class="compact-hyphen" aria-hidden="true">-</span>
+              <span class="compact-item-meta compact-item-storeline">
+                APPSTORE
+                <span class="platform-icons compact-meta-icons" aria-hidden="true">
+                  <svg class="platform-icon" aria-hidden="true"><use href="assets/platform-icons.svg#iphone"></use></svg>
+                </span>
+              </span>
+            </div>
+            <div class="overview-detail">
+              <p>
+                An algorithm-heavy iPhone app that reached #1 on the App Store
+                in Brazil. It was deeply technical under the hood, but had to
+                stay simple and approachable on the surface.
+              </p>
+              <div class="overview-tags" aria-label="Keywords">
+                <span>#objective-c</span>
+                <span>#algorithms</span>
+                <span>#iphone</span>
+                <span>#app-store</span>
+              </div>
+            </div>
+          </a>
+        </div>
       </section>
     </main>
   </body>
