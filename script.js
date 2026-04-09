@@ -1,7 +1,7 @@
 const HEADER_LINKS = [
   { key: "about", label: "Home" },
+  { key: "archive", label: "Apps" },
   { key: "work", label: "Work" },
-  { key: "archive", label: "Products" },
   { key: "contact", label: "Contact" },
 ];
 const SVG_NS = "http://www.w3.org/2000/svg";
