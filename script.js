@@ -1,7 +1,5 @@
 const HEADER_LINKS = [
   { key: "about", label: "Home" },
-  { key: "archive", label: "Apps" },
-  { key: "work", label: "Work" },
   { key: "contact", label: "Contact" },
 ];
 const SVG_NS = "http://www.w3.org/2000/svg";
@@ -41,15 +39,7 @@ function navHref(key, isHomePage) {
     return "mailto:jhneves@me.com";
   }
 
-  if (key === "about") {
-    return "index.html";
-  }
-
-  if (key === "work") {
-    return "work.html";
-  }
-
-  return "products.html";
+  return "index.html";
 }
 
 function renderHeader() {
