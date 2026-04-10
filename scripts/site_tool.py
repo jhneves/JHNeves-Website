@@ -25,24 +25,21 @@ DEFAULT_CONFIG: dict[str, Any] = {
     }
 }
 
-PUBLIC_ROOT_FILES = [
-    "index.html",
-    "arc-dia.html",
-    "cash-app.html",
-    "mobile-platform.html",
-    "today-planned.html",
-    "save-lala-again.html",
-    "super-pipe-bird.html",
-    "kitesurfing.html",
-    "products.html",
-    "work.html",
+STATIC_ROOT_FILES = [
     "script.js",
     "styles.css",
 ]
 
 PUBLIC_DIRS = ["assets"]
 
-REQUIRED_SITE_FILES = [ROOT / path for path in [*PUBLIC_ROOT_FILES, *PUBLIC_DIRS]]
+
+def public_root_files() -> list[str]:
+    html_files = sorted(path.name for path in ROOT.glob("*.html"))
+    return [*html_files, *STATIC_ROOT_FILES]
+
+
+def required_site_files() -> list[Path]:
+    return [ROOT / path for path in [*public_root_files(), *PUBLIC_DIRS]]
 
 
 def load_json(path: Path) -> dict[str, Any]:
@@ -68,7 +65,7 @@ def deploy_settings() -> dict[str, Any]:
 
 
 def ensure_required_site_files() -> None:
-    missing = [str(path.relative_to(ROOT)) for path in REQUIRED_SITE_FILES if not path.exists()]
+    missing = [str(path.relative_to(ROOT)) for path in required_site_files() if not path.exists()]
     if missing:
         raise RuntimeError(f"Missing required site files: {', '.join(missing)}")
 
@@ -105,7 +102,7 @@ def build_site_bundle() -> Path:
     ensure_required_site_files()
     ensure_build_dir_clean()
 
-    for filename in PUBLIC_ROOT_FILES:
+    for filename in public_root_files():
         shutil.copy2(ROOT / filename, BUILD_DIR / filename)
 
     for dirname in PUBLIC_DIRS:
