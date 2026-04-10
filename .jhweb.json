@@ -1,0 +1,10 @@
+{
+  "deployment": {
+    "provider": "cloudflare-pages",
+    "project_name": "jhneves-website",
+    "production_branch": "main",
+    "deploy_dir": "dist",
+    "production_url": "https://jhneves.com",
+    "pages_domain": "https://jhneves-website.pages.dev"
+  }
+}
