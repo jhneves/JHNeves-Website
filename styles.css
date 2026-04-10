@@ -51,6 +51,16 @@ a {
   text-decoration: none;
 }
 
+.text-link,
+.project-summary a,
+.detail-copy a,
+.overview-detail a,
+.meta-block a {
+  color: var(--text);
+  font-weight: 500;
+  text-decoration: none;
+}
+
 .visually-hidden {
   position: absolute;
   width: 1px;
@@ -109,7 +119,7 @@ a {
 }
 
 .intro-accent {
-  color: var(--text);
+  color: var(--accent);
 }
 
 .brand-dot,
@@ -148,11 +158,36 @@ a {
 }
 
 .nav-links a:hover,
+.nav-links a:focus-visible,
 .contact-link:hover,
+.contact-link:focus-visible {
+  text-decoration: underline;
+  text-decoration-color: var(--accent);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+}
+
+.text-link:hover,
+.project-summary a:hover,
+.detail-copy a:hover,
+.overview-detail a:hover,
+.meta-block a:hover,
+.text-link:focus-visible,
+.project-summary a:focus-visible,
+.detail-copy a:focus-visible,
+.overview-detail a:focus-visible,
+.meta-block a:focus-visible {
+  color: var(--text);
+  text-decoration: underline;
+  text-decoration-color: var(--accent);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+}
+
 .detail-footer a:hover,
 .breadcrumb a:hover,
-.text-link:hover {
-  color: var(--accent);
+.detail-footer a:focus-visible,
+.breadcrumb a:focus-visible {
   text-decoration: underline;
   text-decoration-color: var(--accent);
   text-decoration-thickness: 1px;
@@ -160,8 +195,8 @@ a {
 }
 
 .nav-links a.is-active {
-  color: var(--accent);
-  border-bottom: 1px solid var(--accent);
+  color: color-mix(in srgb, var(--muted) 80%, transparent);
+  text-decoration: none;
 }
 
 .page-main {
@@ -170,9 +205,9 @@ a {
 
 .intro-grid {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 0;
-  align-items: start;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 1.6rem;
+  align-items: center;
   margin: 0;
 }
 
@@ -181,14 +216,14 @@ a {
 }
 
 .portrait-card {
-  display: inline-block;
+  display: block;
   position: relative;
 }
 
 .intro-avatar {
-  float: left;
-  width: 6.25rem;
-  margin: 0.18rem 0.9rem 0.2rem 0;
+  width: 10.75rem;
+  align-self: center;
+  margin: 0;
 }
 
 .portrait-card::after {
@@ -215,8 +250,7 @@ a {
   position: relative;
   z-index: 1;
   overflow: hidden;
-  border-radius: 0.8rem;
-  border: 1px solid color-mix(in srgb, var(--accent) 50%, transparent);
+  border-radius: 50%;
 }
 
 .portrait-mark {
@@ -247,12 +281,13 @@ a {
   display: grid;
   align-content: center;
   align-self: center;
+  min-width: 0;
 }
 
 .intro-heading {
   margin: 0;
-  font-size: clamp(1.16rem, 1.5vw, 1.56rem);
-  line-height: 1.36;
+  font-size: clamp(1rem, 1.15vw, 1.26rem);
+  line-height: 1.42;
   font-weight: 400;
   color: var(--muted);
   max-width: none;
@@ -307,6 +342,13 @@ a {
   margin-bottom: 0.55rem;
 }
 
+.section-context {
+  margin: 0 0 0.85rem;
+  color: var(--muted);
+  font-size: 0.96rem;
+  line-height: 1.45;
+}
+
 .stack-list {
   display: grid;
   gap: 2rem;
@@ -345,6 +387,43 @@ a {
   line-height: 1.08;
 }
 
+.compact-item-subtle {
+  align-items: center;
+  gap: 0.32rem;
+  padding: 0.2rem 0;
+}
+
+.compact-item-subtle .compact-item-title {
+  font-size: clamp(0.98rem, 1.12vw, 1.08rem);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  font-style: italic;
+}
+
+.compact-item-subtle .compact-item-meta {
+  font-size: clamp(0.82rem, 0.96vw, 0.92rem);
+  letter-spacing: 0.03em;
+  line-height: 1.08;
+  font-style: italic;
+}
+
+.compact-item-status {
+  display: inline-flex;
+  align-items: center;
+  align-self: center;
+  padding: 0.08rem 0.28rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--surface) 72%, transparent);
+  color: var(--tertiary);
+  font-size: clamp(0.46rem, 0.56vw, 0.54rem);
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  text-transform: uppercase;
+  font-variant-caps: normal;
+}
+
 .compact-item-title {
   font-size: clamp(1.14rem, 1.42vw, 1.38rem);
   font-weight: 700;
@@ -380,6 +459,7 @@ a {
   line-height: 1;
   text-transform: uppercase;
   font-variant-caps: normal;
+  align-self: center;
 }
 
 .compact-item-meta .compact-meta-icons {
@@ -391,7 +471,7 @@ a {
 .compact-item-meta .compact-meta-icons .platform-icon {
   color: var(--muted);
   height: 1.1em;
-  transform: translateY(-0.06rem);
+  transform: none;
 }
 
 .platform-icons {
@@ -410,14 +490,14 @@ a {
   opacity: 1;
 }
 
-.compact-item:hover .compact-item-title,
-.compact-item:hover .compact-item-meta,
+.compact-item-title-link:hover,
+.compact-item-title-link:focus-visible,
 .section-link:hover {
-  color: var(--accent);
+  color: inherit;
 }
 
-.compact-item:hover .compact-item-title,
-.compact-item:hover .compact-item-meta,
+.compact-item-title-link:hover,
+.compact-item-title-link:focus-visible,
 .section-link:hover {
   text-decoration: underline;
   text-decoration-color: var(--accent);
@@ -427,8 +507,7 @@ a {
 
 .meta-block p,
 .detail-copy p,
-.detail-copy li,
-.detail-footer a {
+.detail-copy li {
   color: var(--muted);
 }
 
@@ -466,10 +545,6 @@ a {
 
 .breadcrumb {
   margin-bottom: 3rem;
-}
-
-.breadcrumb a {
-  color: color-mix(in srgb, var(--muted) 75%, transparent);
 }
 
 .detail-hero {
@@ -833,8 +908,12 @@ a {
   text-transform: uppercase;
 }
 
-.next-project a:hover {
-  color: var(--accent);
+.next-project a:hover,
+.next-project a:focus-visible {
+  text-decoration: underline;
+  text-decoration-color: var(--accent);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
 }
 
 .detail-footer {
@@ -871,7 +950,7 @@ a {
 
 .overview-entry:hover .compact-item-title,
 .overview-entry:hover .compact-item-meta {
-  color: var(--accent);
+  color: inherit;
   text-decoration: underline;
   text-decoration-color: var(--accent);
   text-decoration-thickness: 1px;
@@ -989,7 +1068,7 @@ a {
 }
 
 .project-actions a {
-  color: var(--accent);
+  color: var(--text);
   font-size: 0.6875rem;
   font-weight: 700;
   letter-spacing: 0.14em;
@@ -1001,8 +1080,9 @@ a {
 }
 
 .project-back:hover,
-.project-actions a:hover {
-  color: var(--accent);
+.project-back:focus-visible,
+.project-actions a:hover,
+.project-actions a:focus-visible {
   text-decoration: underline;
   text-decoration-color: var(--accent);
   text-decoration-thickness: 1px;
@@ -1218,9 +1298,14 @@ a {
     width: auto;
   }
 
+  .intro-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
   .intro-avatar {
     width: 5.25rem;
-    margin: 0.12rem 0.72rem 0.18rem 0;
+    margin: 0 auto;
   }
 
   .portrait-frame {
