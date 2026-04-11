@@ -505,6 +505,19 @@ a {
   text-underline-offset: 0.18em;
 }
 
+.compact-item-title-link[target="_blank"]::after {
+  content: "↗";
+  display: inline-block;
+  margin-left: 0.22em;
+  color: var(--tertiary);
+  font-size: 0.62em;
+  font-weight: 500;
+  font-variant-caps: normal;
+  line-height: 1;
+  text-transform: none;
+  vertical-align: 0.16em;
+}
+
 .meta-block p,
 .detail-copy p,
 .detail-copy li {
@@ -1105,6 +1118,46 @@ a {
   gap: 1.25rem;
 }
 
+.photo-page .project-header {
+  gap: 0.25rem;
+}
+
+.photo-page .project-title {
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+
+.photo-gallery-breakout {
+  width: min(calc(100vw - 3rem), 78rem);
+  margin: 1.4rem 50% 3rem;
+  transform: translateX(-50%);
+}
+
+.photo-gallery-wall {
+  display: block;
+  columns: 3 18rem;
+  column-gap: 1.15rem;
+}
+
+.photo-gallery-wall .project-shot {
+  break-inside: avoid;
+  display: block;
+  margin: 0 0 1.15rem;
+}
+
+.photo-gallery-wall .project-frame {
+  min-height: 0;
+  border: 0;
+  border-radius: 0.35rem;
+  background: none;
+}
+
+.photo-gallery-wall .project-frame img {
+  width: 100%;
+  height: auto;
+  border-radius: inherit;
+}
+
 .project-shot {
   margin: 0;
   display: grid;
@@ -1278,6 +1331,14 @@ a {
     margin-top: 3.25rem;
   }
 
+  .photo-gallery-wall {
+    columns: 2 16rem;
+  }
+
+  .photo-gallery-breakout {
+    width: min(calc(100vw - 2rem), 52rem);
+  }
+
   .section-block-overview {
     margin-top: 5rem;
   }
@@ -1321,6 +1382,20 @@ a {
 
   .project-title {
     font-size: clamp(1.9rem, 9vw, 2.6rem);
+  }
+
+  .photo-page .project-title {
+    letter-spacing: -0.03em;
+  }
+
+  .photo-gallery-wall {
+    columns: 1;
+  }
+
+  .photo-gallery-breakout {
+    width: 100%;
+    margin: 1rem 0 2rem;
+    transform: none;
   }
 
   .section-block-overview {
