@@ -1118,15 +1118,6 @@ a {
   gap: 1.25rem;
 }
 
-.photo-page .project-header {
-  gap: 0.25rem;
-}
-
-.photo-page .project-title {
-  line-height: 1;
-  letter-spacing: -0.04em;
-}
-
 .photo-gallery-breakout {
   width: min(calc(100vw - 3rem), 78rem);
   margin: 1.4rem 50% 3rem;
@@ -1382,10 +1373,6 @@ a {
 
   .project-title {
     font-size: clamp(1.9rem, 9vw, 2.6rem);
-  }
-
-  .photo-page .project-title {
-    letter-spacing: -0.03em;
   }
 
   .photo-gallery-wall {
