@@ -104,9 +104,76 @@ function inlinePlatformIcons() {
   }
 }
 
+function setupImageLightbox() {
+  const triggers = document.querySelectorAll("[data-lightbox-src]");
+
+  if (!triggers.length) {
+    return;
+  }
+
+  const lightbox = document.createElement("div");
+  lightbox.className = "image-lightbox";
+  lightbox.setAttribute("role", "dialog");
+  lightbox.setAttribute("aria-modal", "true");
+  lightbox.setAttribute("aria-label", "Expanded image");
+  lightbox.hidden = true;
+  lightbox.innerHTML = `
+    <button class="image-lightbox-close" type="button" aria-label="Close expanded image">Close</button>
+    <figure class="image-lightbox-figure">
+      <img class="image-lightbox-image" alt="" />
+      <figcaption class="image-lightbox-caption"></figcaption>
+    </figure>
+  `;
+  document.body.appendChild(lightbox);
+
+  const image = lightbox.querySelector(".image-lightbox-image");
+  const caption = lightbox.querySelector(".image-lightbox-caption");
+  const closeButton = lightbox.querySelector(".image-lightbox-close");
+  let lastTrigger = null;
+
+  function closeLightbox() {
+    lightbox.hidden = true;
+    document.body.classList.remove("has-lightbox");
+    image.removeAttribute("src");
+    caption.textContent = "";
+
+    if (lastTrigger) {
+      lastTrigger.focus();
+    }
+  }
+
+  function openLightbox(trigger) {
+    lastTrigger = trigger;
+    image.src = trigger.dataset.lightboxSrc;
+    image.alt = trigger.dataset.lightboxAlt || "";
+    caption.textContent = trigger.closest("figure")?.querySelector("figcaption")?.textContent.trim() || "";
+    lightbox.hidden = false;
+    document.body.classList.add("has-lightbox");
+    closeButton.focus();
+  }
+
+  for (const trigger of triggers) {
+    trigger.addEventListener("click", () => openLightbox(trigger));
+  }
+
+  closeButton.addEventListener("click", closeLightbox);
+  lightbox.addEventListener("click", (event) => {
+    if (event.target === lightbox) {
+      closeLightbox();
+    }
+  });
+
+  window.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && !lightbox.hidden) {
+      closeLightbox();
+    }
+  });
+}
+
 renderHeader();
 syncHeaderOffset();
 inlinePlatformIcons();
+setupImageLightbox();
 
 if (headerRoot) {
   new ResizeObserver(syncHeaderOffset).observe(headerRoot);

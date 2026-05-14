@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light dark" />
+    <title>42-Hour Codex Migration | João Neves</title>
+    <meta
+      name="description"
+      content="A technical note from João Neves on running Codex for 42h17m through one architecture migration with tests, checkpoints, review gates, and automated validation."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <script defer src="script.js"></script>
+  </head>
+  <body data-nav="archive">
+    <header class="site-header" data-site-header></header>
+
+    <main class="shell page-main project-page item-detail article-page">
+      <header class="project-header">
+        <h1 class="project-title">Running a Codex Agent for 42h</h1>
+      </header>
+
+      <figure class="article-hero-figure">
+        <img
+          src="assets/codex-42-hour-migration.jpg"
+          alt="Photograph of a terminal showing Codex running checkpoint validation around 41 hours into the migration"
+          width="1576"
+          height="2100"
+          loading="eager"
+          decoding="async"
+        />
+      </figure>
+
+      <section class="project-sections article-sections">
+        <section class="project-section article-section">
+          <h2 class="article-section-title">The Run</h2>
+          <div class="project-prose">
+            <p>
+              I am building an AI harness, and I used a Codex lead agent for a large architecture refactor across its codebase. The lead run stayed alive for 42h17m as one uninterrupted task, while the migration moved through checkpointed implementation and review work. That is my personal record so far. I am keeping the product details private for now, but the scale is the point: it has a real Electron desktop surface, persistent state, background runtime work, live scenarios, and enough cross-platform behavior that a loose migration would show up quickly.
+            </p>
+            <p>
+              In theory I knew it should work. The codebase already had strong test coverage, the plan was detailed, and every checkpoint had to pass the same gates before the next one started. Still, there is a difference between knowing the setup should work and watching a migration that large actually land cleanly.
+            </p>
+          </div>
+        </section>
+
+        <section class="project-section article-section">
+          <h2 class="article-section-title">Why The Architecture Changed</h2>
+          <div class="project-prose">
+            <p>
+              The reason I was doing this migration at all is that this is my first serious TypeScript app. I have spent my career building iOS and macOS apps, so I naturally brought some of that architecture with me. Over time, the names and boundaries started carrying too much of that history. Agents got confused by terms that made sense in my head, and a strong TypeScript developer should not have to learn my private Swift-influenced language before understanding where things belong.
+            </p>
+            <p>
+              The app already had a strong architecture and dependency injection, but it was shaped around my own Swift/native habits. I wanted something more explicit and easier to review in a TypeScript/Electron codebase, so I moved it toward Hexagonal Architecture. The product did not change, but under the hood the boundaries did. The point was to make the core app behavior independent from the UI, runtime, commands, clients, and infrastructure around it.
+            </p>
+            <p>
+              In practice, the important boundary was not just UI versus backend. The server became the application-state authority, clients talked through a public contract, the desktop host owned windows and lifecycle, and each renderer window owned its own services and view models. This was the constraint: preserve behavior, change structure.
+            </p>
+            <p>
+              I was willing to let Codex carry this end-to-end because the codebase already had strong tests, and before implementation started I spent about a day writing and tightening the architecture docs and specs with agents. The blueprint defined the target architecture, vocabulary, runtime boundaries, dependency direction, testing strategy, and migration rules. It became the reference contract for agents and humans working in the codebase. The diagrams below are examples of the level of detail I wanted in that plan: how a view event moves through the app, and how the same behavior can be tested without real dependencies.
+            </p>
+            <h3 class="article-subsection-title">Blueprint Examples</h3>
+            <div class="article-diagram-stack">
+              <figure class="article-diagram-figure">
+                <button
+                  class="article-diagram-frame article-diagram-trigger"
+                  type="button"
+                  data-lightbox-src="assets/codex-42h-runtime-event-flow.png"
+                  data-lightbox-alt="Sequence diagram showing a view sending an event through a view model, service, client, and adapter before updates return to the view"
+                  aria-label="Expand view event flow diagram"
+                >
+                  <img
+                    src="assets/codex-42h-runtime-event-flow.png"
+                    alt="Sequence diagram showing a view sending an event through a view model, service, client, and adapter before updates return to the view"
+                    width="2506"
+                    height="1576"
+                  />
+                </button>
+                <figcaption>
+                  Unidirectional view eventing. A click or view action moves inward through the app, then the new state comes back to the view.
+                </figcaption>
+              </figure>
+              <figure class="article-diagram-figure">
+                <button
+                  class="article-diagram-frame article-diagram-trigger"
+                  type="button"
+                  data-lightbox-src="assets/codex-42h-test-stub-flow.png"
+                  data-lightbox-alt="Sequence diagram showing a test configuring a stub client, driving a view event, and asserting the latest view model state"
+                  aria-label="Expand test flow diagram"
+                >
+                  <img
+                    src="assets/codex-42h-test-stub-flow.png"
+                    alt="Sequence diagram showing a test configuring a stub client, driving a view event, and asserting the latest view model state"
+                    width="2002"
+                    height="1684"
+                  />
+                </button>
+                <figcaption>
+                  Total control in tests. A test can stub every dependency, send the same view event a user would trigger, verify the service called the right clients, and assert the final ViewModel state. No real I/O, no real views, fast unit-level coverage at the bottom of the testing pyramid.
+                </figcaption>
+              </figure>
+            </div>
+          </div>
+        </section>
+
+        <section class="project-section article-section">
+          <h2 class="article-section-title">Checkpoints And Validation</h2>
+          <div class="project-prose">
+            <p>
+              That blueprint is what made the migration reviewable, and it was enforced against the diff by both checks and a dedicated architecture-review agent. "Make it cleaner" is useless as a gate. A useful gate has concrete rules: dependency direction, allowed imports, naming, where runtime code can live, how tests stub external behavior, which files are allowed to grow, and what has to be updated when a boundary moves. A service importing an adapter was a failure. A view reaching into clients or runtime wiring was a failure.
+            </p>
+            <p>
+              The project was split into three phases: preparation, the main architecture migration, and cleanup. Phase 2 was broken into 18 checkpoint commits, and each checkpoint had to leave the repo in a shippable state. Leaving a long midpoint where the app was broken and we were hoping the final merge would fix it was not acceptable at all.
+            </p>
+            <p>
+              Most of the 42 hours went into the checkpoint loop: make a slice of the migration, run the full gate, review the diff, fix what surfaced, and only then move to the next slice. Each checkpoint had to pass lint, typecheck, unit tests, integration tests, live end-to-end scenarios, and architecture review. By the end, Phase 2 had landed with a clean repo and passing gates.
+            </p>
+            <p>
+              The agent setup had four Codex roles: lead, worker, reviewer, and architecture gatekeeper. The lead kept the migration moving across checkpoints, workers handled focused implementation tasks, reviewers inspected the changes the way I would expect a careful PR review to inspect them, and the architecture gatekeeper separately checked whether the diff was still following the Hexagonal Architecture rules.
+            </p>
+            <p>
+              The non-LLM checks were just as important as the agents. Linters, typechecking, static analysis, file-size guardrails, architecture docs checks, test suites, and live scenario scripts turned review into concrete next actions: fix the import boundary, update the stub, split the file, restore the scenario, update the docs.
+            </p>
+          </div>
+        </section>
+
+        <section class="project-section article-section">
+          <h2 class="article-section-title">What I Took From It</h2>
+          <div class="project-prose">
+            <p>
+              When the run finished, the 42 hours surprised me, but that was not the main thing. It was expensive, and I already saw places where this pipeline can be made faster and more token efficient. The bigger surprise was opening the app after the migration and seeing it work. I knew the setup had that potential, but I did not expect a change that large to land that cleanly.
+            </p>
+            <p>
+              That is what I want to keep building toward: doing the hard thinking upfront, giving agents the right docs, checks, and feedback, and then letting large pieces of work run while I work on something else. This run happened to be a migration, but the same shape can apply to large features too. The important part is that the repo keeps coming back to a shippable state. That is a good rule for any team. It becomes non-negotiable when agents are doing long stretches of work in parallel.
+            </p>
+          </div>
+        </section>
+      </section>
+
+    </main>
+  </body>
+</html>

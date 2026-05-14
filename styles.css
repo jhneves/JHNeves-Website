@@ -1258,6 +1258,215 @@ a {
   letter-spacing: 0.05em;
 }
 
+.article-page .project-header {
+  gap: 1.1rem;
+}
+
+.article-page .project-title {
+  color: var(--text);
+  font-size: clamp(1.45rem, 6.2vw, 3.35rem);
+  letter-spacing: -0.065em;
+  white-space: nowrap;
+}
+
+.article-sections {
+  margin-top: 3rem;
+  gap: 2.8rem;
+}
+
+.article-hero-figure {
+  position: relative;
+  width: min(100%, 34rem);
+  margin: 2.6rem auto 3.2rem;
+  overflow: hidden;
+  border-radius: 0.45rem;
+}
+
+.article-hero-figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid color-mix(in srgb, var(--line) 88%, transparent);
+  border-radius: inherit;
+}
+
+.article-hero-figure::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  background: radial-gradient(
+    ellipse at center,
+    transparent 56%,
+    color-mix(in srgb, var(--bg) 12%, transparent) 78%,
+    color-mix(in srgb, var(--bg) 34%, transparent) 100%
+  );
+  box-shadow:
+    inset 0 0 2.6rem color-mix(in srgb, var(--bg) 32%, transparent),
+    inset 0 -3rem 4rem color-mix(in srgb, var(--bg) 20%, transparent);
+}
+
+.article-hero-figure figcaption {
+  margin: 0.65rem 0 0;
+  color: color-mix(in srgb, var(--muted) 78%, transparent);
+  font-size: 0.72rem;
+  font-style: italic;
+  line-height: 1.5;
+  text-align: center;
+}
+
+.article-diagram-stack {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.15rem;
+  width: 100%;
+  margin: 1rem 0 2.8rem;
+}
+
+.article-subsection-title {
+  margin: 1.8rem 0 0;
+  color: var(--text);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  line-height: 1.25;
+  text-transform: uppercase;
+}
+
+.article-diagram-figure {
+  margin: 0;
+}
+
+.article-diagram-frame {
+  overflow: hidden;
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 1px solid color-mix(in srgb, var(--line) 70%, transparent);
+  border-radius: 0.45rem;
+  background: color-mix(in srgb, var(--surface) 42%, transparent);
+  color: inherit;
+}
+
+.article-diagram-frame img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.article-diagram-trigger {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  cursor: zoom-in;
+  appearance: none;
+  transition:
+    border-color 160ms ease,
+    background-color 160ms ease,
+    transform 160ms ease;
+}
+
+.article-diagram-trigger:hover {
+  border-color: color-mix(in srgb, var(--accent) 34%, var(--line));
+  background: color-mix(in srgb, var(--surface) 68%, transparent);
+  transform: translateY(-1px);
+}
+
+.article-diagram-trigger:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--accent) 72%, transparent);
+  outline-offset: 3px;
+}
+
+.article-diagram-trigger img {
+  height: 100%;
+  object-fit: contain;
+}
+
+.article-diagram-figure figcaption {
+  margin: 0.65rem 0 0;
+  color: color-mix(in srgb, var(--muted) 78%, transparent);
+  font-size: 0.72rem;
+  font-style: italic;
+  line-height: 1.5;
+  text-align: center;
+}
+
+.image-lightbox[hidden] {
+  display: none;
+}
+
+.image-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: grid;
+  place-items: center;
+  padding: clamp(1rem, 3vw, 2rem);
+  background: color-mix(in srgb, var(--bg) 88%, black);
+}
+
+.image-lightbox-figure {
+  display: grid;
+  gap: 0.8rem;
+  max-width: min(96vw, 90rem);
+  max-height: 90vh;
+  margin: 0;
+}
+
+.image-lightbox-image {
+  max-width: 100%;
+  max-height: 82vh;
+  width: auto;
+  height: auto;
+  justify-self: center;
+  border: 1px solid color-mix(in srgb, var(--line) 80%, transparent);
+  border-radius: 0.45rem;
+  background: color-mix(in srgb, var(--surface) 54%, transparent);
+}
+
+.image-lightbox-caption {
+  max-width: min(100%, 46.5rem);
+  margin: 0 auto;
+  color: color-mix(in srgb, var(--muted) 78%, transparent);
+  font-size: 0.72rem;
+  font-style: italic;
+  line-height: 1.5;
+  text-align: center;
+}
+
+.image-lightbox-close {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  padding: 0.55rem 0.75rem;
+  border: 1px solid color-mix(in srgb, var(--line) 82%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--surface) 86%, transparent);
+  color: var(--text);
+  font: inherit;
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.image-lightbox-close:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--accent) 72%, transparent);
+  outline-offset: 3px;
+}
+
+body.has-lightbox {
+  overflow: hidden;
+}
+
+.article-section-title {
+  margin: 0;
+  color: var(--text);
+  font-size: clamp(1.22rem, 2.4vw, 1.65rem);
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  line-height: 1.08;
+}
+
 @media (max-width: 980px) {
   .topbar,
   .detail-footer-inner,
@@ -1320,6 +1529,10 @@ a {
 
   .project-back {
     margin-top: 3.25rem;
+  }
+
+  .article-diagram-stack {
+    grid-template-columns: 1fr;
   }
 
   .photo-gallery-wall {
