@@ -1118,6 +1118,15 @@ a {
   gap: 1.25rem;
 }
 
+/* Transparent device mockups: drop the frame chrome so only the device shows. */
+.device-gallery .project-frame {
+  min-height: 0;
+  border: 0;
+  background: none;
+  border-radius: 0;
+  overflow: visible;
+}
+
 .photo-gallery-breakout {
   width: min(calc(100vw - 3rem), 78rem);
   margin: 1.4rem 50% 3rem;

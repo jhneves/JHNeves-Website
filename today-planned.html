@@ -7,7 +7,7 @@
     <title>Today Planned | João Neves</title>
     <meta
       name="description"
-      content="Today Planned is João Neves' calmer planning app for iPhone and Apple Watch, built around reliable calendar alarms, availability, and a clearer day view."
+      content="Today Planned is João Neves' planning app for iPhone and Apple Watch that turns calendar events into real alarms — ringing even in Silent Mode and Do Not Disturb — and keeps notes, links, files, and plans for the day in Things."
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -30,12 +30,12 @@
         </div>
       </header>
 
-      <section class="project-gallery">
+      <section class="project-gallery device-gallery">
         <figure class="project-shot">
           <div class="project-frame">
             <img
-              src="https://is1-ssl.mzstatic.com/image/thumb/PurpleSource211/v4/6e/85/a7/6e85a74e-41aa-da97-472e-856d1d15ef21/iPhone_11_Pro_Max_-_Storefront-000-main.png/460x996bb-60.jpg"
-              alt="Today Planned screenshot showing the main day planning view"
+              src="assets/today-planned/day-view.png"
+              alt="Today Planned screenshot showing the day view with events laid out on a timeline"
               loading="lazy"
               decoding="async"
             />
@@ -44,8 +44,8 @@
         <figure class="project-shot">
           <div class="project-frame">
             <img
-              src="https://is1-ssl.mzstatic.com/image/thumb/PurpleSource221/v4/64/12/6e/64126e17-390f-6596-9c2f-907204d49cb4/iPhone_11_Pro_Max_-_Storefront-001-widgetUpNextAndAvailability.png/460x996bb-60.jpg"
-              alt="Today Planned screenshot showing availability and the up-next view"
+              src="assets/today-planned/things.png"
+              alt="Today Planned screenshot showing Things, with notes, links, files, and plans saved to the day"
               loading="lazy"
               decoding="async"
             />
@@ -54,8 +54,8 @@
         <figure class="project-shot">
           <div class="project-frame">
             <img
-              src="https://is1-ssl.mzstatic.com/image/thumb/PurpleSource221/v4/10/da/36/10da362a-a941-09a1-850d-804fec01016a/iPhone_11_Pro_Max_-_Storefront-003-liveActivityLockScreen.png/460x996bb-60.jpg"
-              alt="Today Planned screenshot showing live activity and lock screen alarms"
+              src="assets/today-planned/up-next-widgets.png"
+              alt="Today Planned screenshot showing Up Next widgets on the Home Screen"
               loading="lazy"
               decoding="async"
             />
@@ -67,18 +67,26 @@
         <section class="project-section">
           <div class="project-prose">
             <p>
-              Today Planned is a planning app built to surface the events that
-              actually matter and make them hard to miss. I built it end to end
-              as an independent product, shaping the interaction model, the
-              interface, and the day-to-day experience across iPhone and Apple
-              Watch.
+              Today Planned came out of a simple problem: I kept missing events
+              on my calendar, because notifications were too easy to swipe away
+              and forget. So I built an app that turns the events that matter
+              into real alarms, the kind that ring even in Silent Mode or Do Not
+              Disturb.
             </p>
             <p>
-              It is built in SwiftUI with SwiftData, widgets, Live Activities,
-              and App Intents, with the same product carried across phone,
-              watch, and system surfaces. The app is localized across 11
-              locales, and the full release workflow, including translation,
-              screenshots, and Xcode Cloud delivery, runs automatically.
+              Over time it became where I keep the rest of my day too. Notes,
+              links, files, and plans live alongside events in a section called
+              Things, filters decide which events should become alarms, and a
+              few widgets keep whatever is next in view on the Home and Lock
+              Screen.
+            </p>
+            <p>
+              I design, build, and ship it on my own, across iPhone and Apple
+              Watch. It is written in SwiftUI with SwiftData, and uses widgets,
+              Live Activities, and App Intents to show up across the system. It
+              is localized in 11 languages, and most of the release work runs
+              automatically: translation, screenshots, and delivery through
+              Xcode Cloud.
             </p>
           </div>
         </section>
