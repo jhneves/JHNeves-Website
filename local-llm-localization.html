@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light dark" />
+    <title>How I Localized Today Planned Using a Local LLM | João Neves</title>
+    <meta
+      name="description"
+      content="João Neves on localizing Today Planned with local LLMs: preparing String Catalogs, building a translation pipeline with Codex and Ollama, and landing on gpt-oss-20b for near-frontier translations at virtually no cost."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+      /* Scoped code styling so snippets sit quietly inside the prose. */
+      .tp-code {
+        margin: 0 0 1.45rem;
+        padding: 0.85rem 1rem;
+        border-radius: 12px;
+        background: color-mix(in srgb, currentColor 7%, transparent);
+        font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+        font-size: 0.92rem;
+        line-height: 1.5;
+        overflow-x: auto;
+      }
+      .tp-code code {
+        font: inherit;
+        white-space: pre;
+      }
+      /* Full-width article figures with caption + click-to-expand. */
+      .tp-figure {
+        margin: 0.4rem 0 2.4rem;
+      }
+      .tp-figure-frame {
+        display: block;
+        width: 100%;
+        padding: 0;
+        overflow: hidden;
+        border: 1px solid color-mix(in srgb, var(--line) 70%, transparent);
+        border-radius: 0.6rem;
+        background: color-mix(in srgb, var(--surface) 42%, transparent);
+        color: inherit;
+        cursor: zoom-in;
+        appearance: none;
+        transition: border-color 160ms ease, transform 160ms ease;
+      }
+      .tp-figure-frame:hover {
+        border-color: color-mix(in srgb, var(--accent) 34%, var(--line));
+        transform: translateY(-1px);
+      }
+      .tp-figure-frame:focus-visible {
+        outline: 2px solid color-mix(in srgb, var(--accent) 72%, transparent);
+        outline-offset: 3px;
+      }
+      .tp-figure-frame img {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+      .tp-figure figcaption {
+        margin: 0.65rem 0 0;
+        color: color-mix(in srgb, var(--muted) 78%, transparent);
+        font-size: 0.72rem;
+        font-style: italic;
+        line-height: 1.5;
+        text-align: center;
+      }
+    </style>
+    <script defer src="script.js"></script>
+  </head>
+  <body data-nav="archive">
+    <header class="site-header" data-site-header></header>
+
+    <main class="shell page-main project-page item-detail article-page">
+      <header class="project-header">
+        <h1 class="project-title">How I Localized Today Planned Using a Local LLM</h1>
+        <div class="project-actions">
+          <a href="https://jhneves.medium.com/how-i-localized-my-app-today-planned-using-a-local-llm-37f26390a8ec" target="_blank" rel="noreferrer">Medium</a>
+          <a href="today-planned.html">Today Planned</a>
+        </div>
+      </header>
+
+      <section class="project-sections article-sections">
+        <section class="project-section article-section">
+          <div class="project-prose">
+            <p>
+              When I set out to localize Today Planned, I thought it would be simple — export the strings, send
+              them somewhere, and get back translations. I quickly learned it's never that straightforward.
+            </p>
+            <p>
+              As of version 3, the app has about 650 strings to translate — and each "string" can be anything
+              from a single word to a full sentence that appears somewhere in the app. Translating it into just
+              two new languages — Portuguese (pt-BR) and Spanish — means running roughly 1,300 translations,
+              one for every string. Of course, that's only the first pass; after that, only new or updated
+              strings need to be re-translated.
+            </p>
+            <p>That's when I started thinking: there has to be a smarter way to do this.</p>
+            <p>
+              What began as a simple localization task soon turned into an experiment with automation and local
+              LLMs — a deep dive into seeing how far I could go running translations entirely on my own
+              machines.
+            </p>
+          </div>
+        </section>
+
+        <section class="project-section article-section">
+          <h2 class="article-section-title">Preparing My App for Localization</h2>
+          <div class="project-prose">
+            <p>
+              First things first: my app wasn't ready for localization. Almost every user-facing string was
+              hardcoded.
+            </p>
+            <p>
+              So I spent a long session replacing raw text with the proper localization APIs and adopting
+              String Catalogs.
+            </p>
+            <p>
+              I highly recommend watching Apple's WWDC session on localization — it covers all the essentials
+              you'll need.
+            </p>
+            <figure class="tp-figure">
+              <button
+                class="tp-figure-frame"
+                type="button"
+                data-lightbox-src="assets/local-llm-localization/string-catalog.png"
+                data-lightbox-alt="A String Catalog in Today Planned"
+                aria-label="Expand the String Catalog screenshot"
+              >
+                <img
+                  src="assets/local-llm-localization/string-catalog.png"
+                  alt="A String Catalog in Today Planned"
+                  width="1400"
+                  height="822"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </button>
+              <figcaption>A String Catalog in Today Planned</figcaption>
+            </figure>
+            <p>
+              If your app uses Swift Packages, there's one important gotcha: localized strings inside a package
+              won't be found unless you pass the correct bundle.
+            </p>
+            <p>
+              To make that painless, I built a small macro that automatically injects the right bundle so I
+              never have to remember it.
+            </p>
+            <p>Instead of writing this every time:</p>
+            <pre class="tp-code"><code>Text("Hello there", bundle: #bundle, comment: "Greets the user")</code></pre>
+            <p>I can simply write:</p>
+            <pre class="tp-code"><code>Text(#L("Hello there", "Greets the user"))</code></pre>
+            <p>
+              When using String Catalogs, Xcode auto-generates helpful comments for translators, but I can also
+              add my own when context matters. That balance makes translations far more accurate.
+            </p>
+            <p>
+              Another nice perk: the macro works seamlessly with both plain String and LocalizedStringResource,
+              so it fits naturally into different parts of the codebase.
+            </p>
+            <figure class="tp-figure">
+              <button
+                class="tp-figure-frame"
+                type="button"
+                data-lightbox-src="assets/local-llm-localization/localization-macro.png"
+                data-lightbox-alt="Today Planned localization macro with contextual comments"
+                aria-label="Expand the localization macro screenshot"
+              >
+                <img
+                  src="assets/local-llm-localization/localization-macro.png"
+                  alt="Today Planned localization macro with contextual comments"
+                  width="1400"
+                  height="822"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </button>
+              <figcaption>Today Planned localization macro with contextual comments</figcaption>
+            </figure>
+            <p>
+              Hopefully, Apple lets us define a default lookup bundle for packages someday — I'll be the first
+              to delete this code when that happens.
+            </p>
+          </div>
+        </section>
+
+        <section class="project-section article-section">
+          <h2 class="article-section-title">The Fun Part: Bringing in the LLM</h2>
+          <div class="project-prose">
+            <p>Once my app was ready, I started exploring tools to translate the String Catalog.</p>
+            <p>
+              There are already apps and scripts that do this, but most rely on the OpenAI API. I soon
+              discovered that ChatGPT and the OpenAI API are actually separate products — and since I already
+              had a ChatGPT Plus subscription, I didn't want to pay any extra cost for API usage.
+            </p>
+            <p>
+              Still, I wanted to use my existing subscription somehow. I knew the Shortcuts app could run
+              ChatGPT requests directly if I was logged in — and shortcuts can also be triggered from the
+              command line. That got me thinking: maybe I could build a pipeline that feeds each string through
+              ChatGPT automatically.
+            </p>
+          </div>
+        </section>
+
+        <section class="project-section article-section">
+          <h2 class="article-section-title">Building the Translation Pipeline</h2>
+          <div class="project-prose">
+            <p>
+              With a little help from Codex, I wrote a Swift script that parses the .xcstrings file and sends
+              one translation request per entry. Each entry already includes the source text, target language,
+              comments (context!), and plural forms — so it's the perfect structure to work with.
+            </p>
+            <p>
+              Codex turned out to be the best kind of assistant here. It helped me generate the parser and
+              handle all the command-line arguments I needed, which meant I didn't have to waste time writing
+              boilerplate or dealing with file parsing myself. That let me stay focused on what I actually
+              wanted to build — the translation pipeline itself.
+            </p>
+            <p>
+              Before going all-in on local translation, I briefly experimented with using the Shortcuts app on
+              macOS to forward each string to ChatGPT. It worked for a handful of translations, but quickly ran
+              into usage limits — the kind of "you've reached your prompt limit, try again in an hour" message —
+              making it impractical for larger batches.
+            </p>
+            <p>
+              That quick test confirmed the concept worked, but I needed something more scalable and repeatable
+              — ideally, something I could run entirely offline.
+            </p>
+          </div>
+        </section>
+
+        <section class="project-section article-section">
+          <h2 class="article-section-title">Switching to Ollama</h2>
+          <div class="project-prose">
+            <p>
+              I didn't want to pay for another API, so I looked for a local alternative. I'd used Ollama before,
+              so I gave it another try — this time running on my MacBook Air M2 (16 GB). I swapped my Shortcut
+              integration for calls to Ollama and began experimenting with different open models.
+            </p>
+            <p>I tested a bunch — Llama, Gemma, Qwen, DeepSeek, and others.</p>
+            <p>
+              Results varied wildly. Qwen sometimes mixed Chinese characters into the text. DeepSeek gave good
+              translations but was painfully slow and made my Mac crawl.
+            </p>
+            <p>
+              Eventually, I moved the workload to my Windows gaming PC (RTX 2070, 8 GB VRAM, 16 GB RAM), which I
+              barely use anymore. Running Ollama there freed up my Mac for other work, but DeepSeek was still
+              too slow to be practical. Each model had its own quirks, and none gave the consistency I needed.
+            </p>
+            <p>
+              Getting everything to run on Windows while sending requests from macOS was actually fun to build —
+              and once again, Codex made it much easier by helping me wire up the networking and command-line
+              pieces cleanly.
+            </p>
+            <figure class="tp-figure">
+              <button
+                class="tp-figure-frame"
+                type="button"
+                data-lightbox-src="assets/local-llm-localization/setup.png"
+                data-lightbox-alt="The author's setup: a Mac on the left running the translation app, sending requests over the local network to a Windows PC on the right hosting Ollama"
+                aria-label="Expand the setup photo"
+              >
+                <img
+                  src="assets/local-llm-localization/setup.png"
+                  alt="The author's setup: a Mac on the left running the translation app, sending requests over the local network to a Windows PC on the right hosting Ollama"
+                  width="1024"
+                  height="1088"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </button>
+              <figcaption>
+                My setup (blurred for privacy). On the left, my Mac runs the translation app, sending requests
+                over the local network to my Windows PC on the right, which hosts Ollama (the illuminated case in
+                the back).
+              </figcaption>
+            </figure>
+          </div>
+        </section>
+
+        <section class="project-section article-section">
+          <h2 class="article-section-title">The Breakthrough: gpt-oss-20b</h2>
+          <div class="project-prose">
+            <p>Finally, I tried gpt-oss-20b — and that changed everything.</p>
+            <p>
+              Right away, the translations felt almost on par with ChatGPT's quality. It still ran a bit slower
+              than I'd like, but it was steady, coherent, and followed my rules.
+            </p>
+            <p>
+              One of the biggest advantages was being able to see the model's thinking as it worked through each
+              translation. That insight helped me understand why it chose certain words and phrasing — and also
+              spot the moments when it got stuck in a loop. Debugging those loops became a fascinating process:
+              by reading the reasoning, I could adjust the prompt or simplify the context to help the model
+              break free and finish properly.
+            </p>
+            <p>
+              To make retries more effective, I used a dual-temperature setup: a default of 0.1 for precise,
+              consistent translations, and a fallback of 0.25 when a retry was necessary. The slightly higher
+              temperature gives the model a bit more creative freedom — often enough to escape a reasoning loop
+              and complete the translation.
+            </p>
+            <p>
+              To improve translation accuracy, I started refining the comments in my String Catalogs, giving the
+              model better context for each string. I also iterated on the main translation prompt, fine-tuning
+              it over time to produce more consistent results.
+            </p>
+            <figure class="tp-figure">
+              <button
+                class="tp-figure-frame"
+                type="button"
+                data-lightbox-src="assets/local-llm-localization/translate-ai-running.png"
+                data-lightbox-alt="Translate-AI running in the terminal: the string to translate, the translation comments, the model's reasoning, and the final result"
+                aria-label="Expand the Translate-AI terminal screenshot"
+              >
+                <img
+                  src="assets/local-llm-localization/translate-ai-running.png"
+                  alt="Translate-AI running in the terminal: the string to translate, the translation comments, the model's reasoning, and the final result"
+                  width="1400"
+                  height="830"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </button>
+              <figcaption>
+                Translate-AI running: 📝 string to translate → 💭 translation comments → 🧠 model reasoning for
+                each translation → 💬 final result. This example took about 50 seconds to complete.
+              </figcaption>
+            </figure>
+            <p>
+              And, again, all of this came together through Codex. I basically vibe-coded the entire setup —
+              describing what I wanted in plain language and letting Codex handle the boilerplate like parsing,
+              networking, and file handling. That decision saved me a lot of time and kept the project moving
+              fast. Of course, I reviewed everything and kept a few lightweight tests around to make sure
+              nothing was getting out of control.
+            </p>
+            <p>
+              That combination — visibility into the model's reasoning, prompt fine-tuning, and Codex-powered
+              scripting — was the real turning point. Finally, I had a translation pipeline that worked
+              reliably, entirely offline, and at virtually no cost.
+            </p>
+            <p>
+              (There's a gpt-oss-120b out there too, but that one's well beyond what my humble gaming PC can
+              handle.)
+            </p>
+          </div>
+        </section>
+
+        <section class="project-section article-section">
+          <h2 class="article-section-title">What's Next</h2>
+          <div class="project-prose">
+            <p>
+              Now I plan to expand into other languages. The challenge is I can't verify their accuracy myself,
+              so I'll rely on user feedback to refine them. Thankfully, my users are great at pointing out
+              issues — I fully expect they'll flag translation oddities just as they do with bugs.
+            </p>
+            <figure class="tp-figure">
+              <button
+                class="tp-figure-frame"
+                type="button"
+                data-lightbox-src="assets/local-llm-localization/filters-localized.png"
+                data-lightbox-alt="The Filters screen in Today Planned, localized into Portuguese and Spanish"
+                aria-label="Expand the localized Filters screen"
+              >
+                <img
+                  src="assets/local-llm-localization/filters-localized.png"
+                  alt="The Filters screen in Today Planned, localized into Portuguese and Spanish"
+                  width="1400"
+                  height="868"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </button>
+              <figcaption>
+                The Filters screen in Today Planned, localized into Portuguese and Spanish. In Portuguese, some
+                English loanwords are intentionally preserved — a choice I instructed in the translation prompts
+                to keep the language natural to local users.
+              </figcaption>
+            </figure>
+          </div>
+        </section>
+
+        <section class="project-section article-section">
+          <h2 class="article-section-title">Reflections</h2>
+          <div class="project-prose">
+            <p>
+              I do feel a bit conflicted about automating translations. It replaces work that professional
+              translators do — and I have a lot of respect for that craft. But as an indie developer, it's
+              simply not something I can afford right now. Hopefully, if these translations help the app grow,
+              I'll be able to bring real translators into the process later.
+            </p>
+            <p>
+              Until then, this pipeline does the job surprisingly well — and building it has been a great
+              learning experience.
+            </p>
+          </div>
+        </section>
+
+        <section class="project-section article-section">
+          <h2 class="article-section-title">Just for Fun: Local vs. API Cost</h2>
+          <div class="project-prose">
+            <p>
+              I got curious about how much this setup actually costs to run — just roughly, and ignoring
+              hardware since my PC already exists.
+            </p>
+            <p>
+              Running gpt-oss-20b locally on my PC draws about 200 W, which comes out to roughly $0.03 per hour
+              of electricity at average U.S. rates.
+            </p>
+            <p>
+              Translating my entire app into a new language currently takes around 4–5 hours, so the whole run
+              costs maybe fifteen cents of power — give or take a few pennies.
+            </p>
+            <p>Compared to using a paid API, it's obviously much cheaper, but that's not really the point.</p>
+            <p>
+              The real value is being able to experiment, rerun, and fine-tune as much as I want without
+              worrying about quotas or usage costs.
+            </p>
+            <p>
+              Ultimately, this project was less about saving money and more about exploring what's possible
+              locally — connecting all the pieces together, learning along the way, and watching the whole
+              translation pipeline come to life.
+            </p>
+          </div>
+        </section>
+      </section>
+
+      <section class="next-project">
+        <p>Next</p>
+        <a href="today-planned-v4-things.html">An App Inside My App</a>
+      </section>
+    </main>
+  </body>
+</html>

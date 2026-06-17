@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light dark" />
+    <title>An App Inside My App | João Neves</title>
+    <meta
+      name="description"
+      content="João Neves on Things, the headline feature in Today Planned v4: a daily place to capture notes, links, scans, and files, and why the whole app stays a one-time purchase with no servers and no subscription."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+      /* Scoped list styling so the prose bullets match the site's quiet, native look. */
+      .tp-things-list {
+        margin: 0 0 1.45rem;
+        padding: 0;
+        list-style: none;
+        display: grid;
+        gap: 0.55rem;
+      }
+      .tp-things-list li {
+        position: relative;
+        padding-left: 1.15rem;
+        color: inherit;
+      }
+      .tp-things-list li::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0.65em;
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background: currentColor;
+        opacity: 0.55;
+      }
+    </style>
+    <script defer src="script.js"></script>
+  </head>
+  <body data-nav="archive">
+    <header class="site-header" data-site-header></header>
+
+    <main class="shell page-main project-page item-detail article-page">
+      <header class="project-header">
+        <h1 class="project-title">An App Inside My App</h1>
+        <div class="project-actions">
+          <a href="https://apps.apple.com/us/app/today-planned-calendar-alarms/id1672689846" target="_blank" rel="noreferrer">App Store</a>
+          <a href="today-planned.html">Today Planned</a>
+        </div>
+      </header>
+
+      <section class="project-gallery device-gallery">
+        <figure class="project-shot">
+          <div class="project-frame">
+            <img
+              src="assets/today-planned-v4/things-grid.png"
+              alt="Things in Today Planned showing a grid of saved items: a budget spreadsheet, a client brief PDF, a flight link preview, scanned passport photos, and a video"
+              width="760"
+              height="1647"
+              loading="eager"
+              decoding="async"
+            />
+          </div>
+        </figure>
+        <figure class="project-shot">
+          <div class="project-frame">
+            <img
+              src="assets/today-planned-v4/things-markdown.png"
+              alt="A Markdown plan inside Things with checkboxes, a table, and file, people, and due metadata"
+              width="760"
+              height="1647"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+        </figure>
+        <figure class="project-shot">
+          <div class="project-frame">
+            <img
+              src="assets/today-planned-v4/things-tags.png"
+              alt="Things organized for a project with Work, Marketing, and Priority tags, pinned notes, link cards, and a receipt"
+              width="760"
+              height="1647"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+        </figure>
+      </section>
+
+      <section class="project-sections article-sections">
+        <section class="project-section article-section">
+          <div class="project-prose">
+            <p>I just launched a new app… inside my app.</p>
+            <p>
+              <strong>Things</strong> — the headline feature in Today Planned v4 — could have shipped on its
+              own. Everyone I showed it to asked why I didn't.
+            </p>
+            <p>
+              So what is it? Things helps you knock out all the little things throughout your day, from one
+              place, without losing your context:
+            </p>
+            <ul class="tp-things-list">
+              <li>Write a quick note, or a full markdown one</li>
+              <li>Scan a document</li>
+              <li>Save a link — and annotate it</li>
+              <li>Actually, annotate <em>anything</em>: that screenshot, that website you want to give more meaning</li>
+            </ul>
+            <p>
+              Save into Things from anywhere — Share Sheet, Shortcuts, drag &amp; drop, even straight from the
+              clipboard. And you organize it the way <em>you</em> think — folders, tags, colors, icons. I love
+              beautifully designed apps, and Things is exactly how I like my… things 😉
+            </p>
+            <p>And this is just the beginning.</p>
+            <p>
+              Here's the part people question: Today Planned is a <strong>one-time purchase</strong>. Buy it
+              once, it's yours, it keeps getting better with every update.
+            </p>
+            <p>
+              It works because the app doesn't <em>need</em> a subscription. Your things sync across devices —
+              that's iCloud, not my server. On Mac they even show up as plain folders and files in Finder. It
+              watches your calendar locally, private by design, and rings alarms that cut through Silent Mode
+              and Do Not Disturb. Why would I charge you monthly for things your device already does?
+            </p>
+            <p>
+              No team, no servers, just me — building something so good you can't not tell a friend. You get
+              more than you expected, you tell someone, positive loop. That's the win.
+            </p>
+            <p>
+              And it's working: since launching Things, I've <strong>doubled my active users</strong>.
+            </p>
+            <p>
+              Today Planned v4 is live on the
+              <a class="text-link" href="https://apps.apple.com/us/app/today-planned-calendar-alarms/id1672689846" target="_blank" rel="noreferrer">App Store</a>.
+            </p>
+          </div>
+        </section>
+      </section>
+
+      <section class="next-project">
+        <p>Next</p>
+        <a href="codex-42-hour-migration.html">Running a Codex Agent for 42h</a>
+      </section>
+    </main>
+  </body>
+</html>

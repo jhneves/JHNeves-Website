@@ -1275,7 +1275,7 @@ a {
   color: var(--text);
   font-size: clamp(1.45rem, 6.2vw, 3.35rem);
   letter-spacing: -0.065em;
-  white-space: nowrap;
+  text-wrap: balance;
 }
 
 .article-sections {

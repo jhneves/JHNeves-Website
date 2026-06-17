@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light dark" />
+    <title>Translate-AI | João Neves</title>
+    <meta
+      name="description"
+      content="João Neves on Translate-AI, a local tool that translates Today Planned into 9 languages using self-hosted LLMs running on an RTX 5090 — virtually free, private, and under full control."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <script defer src="script.js"></script>
+  </head>
+  <body data-nav="archive">
+    <header class="site-header" data-site-header></header>
+
+    <main class="shell page-main project-page item-detail article-page">
+      <header class="project-header">
+        <h1 class="project-title">Translate-AI</h1>
+        <div class="project-actions">
+          <a href="https://www.linkedin.com/posts/joao-henrique-n-40b47524_a-major-new-version-of-today-planned-is-coming-ugcPost-7459689107485671426-uK9F" target="_blank" rel="noreferrer">LinkedIn</a>
+          <a href="today-planned.html">Today Planned</a>
+        </div>
+      </header>
+
+      <section class="project-sections article-sections">
+        <section class="project-section article-section">
+          <div class="project-prose">
+            <p>
+              A major new version of Today Planned is coming out soon, and one of the steps to get it ready is
+              translating the app into 9 languages. I have not productized this, but I have this internal tool
+              I call Translate-AI that runs entirely locally.
+            </p>
+            <p>
+              My MacBook just kicks off the script, then a server on my gaming laptop with an RTX 5090 does the
+              heavy lifting. I bought it for gaming first of course, but fast local inference was a pretty good
+              second excuse 😉
+            </p>
+            <p>
+              Running your own LLMs is nice for this kind of stuff. Virtually free run cost, no token anxiety,
+              data never leaves the premises, and you get a lot of control. Obviously it is not as good as
+              frontier models, but you just have to know when to use what.
+            </p>
+          </div>
+        </section>
+      </section>
+
+      <section class="next-project">
+        <p>Next</p>
+        <a href="local-llm-localization.html">How I Localized Today Planned Using a Local LLM</a>
+      </section>
+    </main>
+  </body>
+</html>
