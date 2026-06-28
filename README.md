@@ -17,6 +17,7 @@ Common commands:
 ./jhweb site status --cloudflare
 ./jhweb site build
 ./jhweb site upload
+./jhweb wingman signups
 ```
 
 One-time Cloudflare setup:
@@ -29,3 +30,14 @@ One-time Cloudflare setup:
 Deployment config lives in [`.jhweb.json`](./.jhweb.json).
 
 The deploy flow builds a clean `dist/` bundle and uploads that bundle to Cloudflare Pages, so non-site repo files like `Design System/`, `research/`, and local source material are not published.
+
+## Wingman signups
+
+Fetch the Wingman waitlist CSV from the protected `/api/signups` endpoint:
+
+```bash
+JHWEB_ADMIN_TOKEN=... ./jhweb wingman signups
+JHWEB_ADMIN_TOKEN=... ./jhweb wingman signups --output waitlist.csv
+```
+
+The command uses `production_url` from [`.jhweb.json`](./.jhweb.json) by default. Use `--url` to query the Pages domain or a local preview instead.

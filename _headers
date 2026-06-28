@@ -1,0 +1,5 @@
+# The Wingman teaser is iterated frequently. Always revalidate so JS/HTML/audio updates
+# land immediately instead of being served stale from a 4h browser cache (etag -> 304 when
+# unchanged, so this is cheap). Scoped to /wingman/* only; the rest of the site is untouched.
+/wingman/*
+  Cache-Control: no-cache

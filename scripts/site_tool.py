@@ -3,16 +3,27 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
+import os
+import re
 import shutil
 import subprocess
 import sys
+import urllib.error
+import urllib.parse
+import urllib.request
 from pathlib import Path
 from typing import Any
 
 ROOT = Path(__file__).resolve().parent.parent
 CONFIG_PATH = ROOT / ".jhweb.json"
 BUILD_DIR = ROOT / "dist"
+DEFAULT_USER_AGENT = (
+    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
+    "AppleWebKit/605.1.15 (KHTML, like Gecko) "
+    "Version/18.0 Safari/605.1.15"
+)
 
 DEFAULT_CONFIG: dict[str, Any] = {
     "deployment": {
@@ -31,6 +42,15 @@ STATIC_ROOT_FILES = [
 ]
 
 PUBLIC_DIRS = ["assets"]
+
+# Optional dirs copied verbatim into the bundle when present (skipped if absent).
+#   wingman/   -> the WebGL teaser, served at /wingman
+#   functions/ -> Cloudflare Pages Functions (the waitlist capture API)
+OPTIONAL_DIRS = ["wingman", "functions"]
+
+# Optional root files copied verbatim into the bundle when present (e.g. Cloudflare Pages
+# _headers / _redirects). Skipped silently if absent.
+OPTIONAL_FILES = ["_headers", "_redirects"]
 
 
 def public_root_files() -> list[str]:
@@ -108,7 +128,54 @@ def build_site_bundle() -> Path:
     for dirname in PUBLIC_DIRS:
         shutil.copytree(ROOT / dirname, BUILD_DIR / dirname)
 
+    for dirname in OPTIONAL_DIRS:
+        src = ROOT / dirname
+        if src.is_dir():
+            shutil.copytree(src, BUILD_DIR / dirname)
+
+    for filename in OPTIONAL_FILES:
+        src = ROOT / filename
+        if src.is_file():
+            shutil.copy2(src, BUILD_DIR / filename)
+
+    stamp_wingman_asset_versions(BUILD_DIR)
+
     return BUILD_DIR
+
+
+# Match relative ES-module specifiers in `import ... from "./x.js"` and `import("../x.js")`.
+_IMPORT_RE = re.compile(r"""((?:from|import\()\s*["'])(\.\.?/[^"']+\.js)(["'])""")
+# Match relative asset URLs referenced as quoted strings in JS/HTML (audio, timeline, etc.).
+_ASSET_RE = re.compile(
+    r"""(["'])(\.\.?/[^"']+\.(?:mp3|wav|ogg|json|css|png|jpe?g|svg|webp|woff2?|ico|gif))(["'])"""
+)
+
+
+def stamp_wingman_asset_versions(bundle: Path) -> None:
+    """Append a content-hash ?v= to every relative JS import under wingman/ so a deploy
+    that changes the code is fetched fresh by browsers, while unchanged code stays cached.
+    The HTML is served no-cache (see _headers), so it always pulls the current versions."""
+    wing = bundle / "wingman"
+    if not wing.is_dir():
+        return
+
+    digest = hashlib.md5()
+    for path in sorted(wing.rglob("*")):
+        if path.is_file():
+            digest.update(path.read_bytes())
+    version = digest.hexdigest()[:8]
+
+    def add_version(match: re.Match[str]) -> str:
+        return f"{match.group(1)}{match.group(2)}?v={version}{match.group(3)}"
+
+    targets = [*sorted(wing.rglob("*.js")), wing / "index.html"]
+    for path in targets:
+        if not path.is_file():
+            continue
+        text = path.read_text(encoding="utf-8")
+        stamped = _ASSET_RE.sub(add_version, _IMPORT_RE.sub(add_version, text))
+        if stamped != text:
+            path.write_text(stamped, encoding="utf-8")
 
 
 def cloudflare_project_name(args_project_name: str | None = None) -> str:
@@ -268,6 +335,75 @@ def handle_site_upload(args: argparse.Namespace) -> int:
     return 0
 
 
+def public_site_url(args_url: str | None = None) -> str:
+    settings = deploy_settings()
+    return str(args_url or settings.get("production_url") or settings.get("pages_domain") or "").strip()
+
+
+def admin_token(args_token: str | None = None) -> str:
+    return str(args_token or os.environ.get("JHWEB_ADMIN_TOKEN") or os.environ.get("ADMIN_TOKEN") or "").strip()
+
+
+def handle_wingman_signups(args: argparse.Namespace) -> int:
+    token = admin_token(args.token)
+    if not token:
+        print("Missing admin token. Pass --token or set JHWEB_ADMIN_TOKEN or ADMIN_TOKEN.", file=sys.stderr)
+        return 2
+
+    base_url = public_site_url(args.url)
+    if not base_url:
+        print("Missing site URL. Set production_url/pages_domain in .jhweb.json or pass --url.", file=sys.stderr)
+        return 2
+    if "://" not in base_url:
+        print("Site URL must include a scheme, such as https://jhneves.com.", file=sys.stderr)
+        return 2
+
+    endpoint = f"{base_url.rstrip('/')}/api/signups"
+    request = urllib.request.Request(
+        endpoint,
+        headers={
+            "accept": "text/csv",
+            "authorization": f"Bearer {token}",
+            "user-agent": args.user_agent,
+        },
+    )
+
+    try:
+        with urllib.request.urlopen(request, timeout=args.timeout) as response:
+            csv_data = response.read()
+    except urllib.error.HTTPError as exc:
+        body = exc.read().decode("utf-8", errors="replace").strip()
+        message = f"Signups fetch failed: HTTP {exc.code}"
+        if body:
+            message = f"{message}: {body}"
+        print(message, file=sys.stderr)
+        if exc.code == 401:
+            print("Check that the token matches the Cloudflare Pages ADMIN_TOKEN secret.", file=sys.stderr)
+        return 1
+    except urllib.error.URLError as exc:
+        print(f"Signups fetch failed: {exc.reason}", file=sys.stderr)
+        return 1
+    except TimeoutError:
+        print("Signups fetch timed out.", file=sys.stderr)
+        return 1
+
+    if args.output:
+        output_path = Path(args.output).expanduser()
+        try:
+            output_path.parent.mkdir(parents=True, exist_ok=True)
+            output_path.write_bytes(csv_data)
+        except OSError as exc:
+            print(f"Could not write {output_path}: {exc}", file=sys.stderr)
+            return 1
+        print(f"Wrote Wingman signups CSV to {output_path}.")
+        return 0
+
+    sys.stdout.buffer.write(csv_data)
+    if not csv_data.endswith(b"\n"):
+        sys.stdout.buffer.write(b"\n")
+    return 0
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog="jhweb", description="Build and deploy the JH Neves portfolio site.")
     subparsers = parser.add_subparsers(dest="command", required=True)
@@ -306,6 +442,17 @@ def build_parser() -> argparse.ArgumentParser:
     upload_parser.add_argument("--project-name", help="Override the configured Cloudflare Pages project name.")
     upload_parser.add_argument("--wrangler-bin", help="Override the Wrangler command to use.")
     upload_parser.set_defaults(func=handle_site_upload)
+
+    wingman_parser = subparsers.add_parser("wingman", help="Manage Wingman teaser data.")
+    wingman_subparsers = wingman_parser.add_subparsers(dest="wingman_command", required=True)
+
+    signups_parser = wingman_subparsers.add_parser("signups", help="Fetch Wingman waitlist signups as CSV.")
+    signups_parser.add_argument("--token", help="Admin token. Defaults to JHWEB_ADMIN_TOKEN or ADMIN_TOKEN.")
+    signups_parser.add_argument("--url", help="Site origin to query. Defaults to production_url, then pages_domain.")
+    signups_parser.add_argument("--output", "-o", help="Write CSV to a file instead of stdout.")
+    signups_parser.add_argument("--timeout", type=float, default=30.0, help="Request timeout in seconds.")
+    signups_parser.add_argument("--user-agent", default=DEFAULT_USER_AGENT, help=argparse.SUPPRESS)
+    signups_parser.set_defaults(func=handle_wingman_signups)
 
     publish_parser = subparsers.add_parser("publish", help="Build and deploy the site to Cloudflare Pages.")
     publish_parser.add_argument("--skip-deploy", action="store_true", help="Stop after building dist/.")
