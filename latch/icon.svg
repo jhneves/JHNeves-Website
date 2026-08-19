@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" role="img" aria-labelledby="title description">
+  <title id="title">Latch app icon</title>
+  <desc id="description">Two offset paths of app tiles highlighted within a quiet grid.</desc>
+  <defs>
+    <rect id="active-tile" width="88" height="88" rx="21"/>
+    <rect id="quiet-tile" width="80" height="80" rx="19"/>
+  </defs>
+
+  <rect x="52" y="52" width="920" height="920" rx="216" fill="#18191B"/>
+
+  <g fill="#7D7F85" opacity="0.15">
+    <use href="#quiet-tile" x="272" y="272"/><use href="#quiet-tile" x="372" y="272"/><use href="#quiet-tile" x="472" y="272"/><use href="#quiet-tile" x="572" y="272"/><use href="#quiet-tile" x="672" y="272"/>
+    <use href="#quiet-tile" x="272" y="372"/><use href="#quiet-tile" x="372" y="372"/><use href="#quiet-tile" x="472" y="372"/><use href="#quiet-tile" x="572" y="372"/><use href="#quiet-tile" x="672" y="372"/>
+    <use href="#quiet-tile" x="272" y="472"/><use href="#quiet-tile" x="372" y="472"/><use href="#quiet-tile" x="472" y="472"/><use href="#quiet-tile" x="572" y="472"/><use href="#quiet-tile" x="672" y="472"/>
+    <use href="#quiet-tile" x="272" y="572"/><use href="#quiet-tile" x="372" y="572"/><use href="#quiet-tile" x="472" y="572"/><use href="#quiet-tile" x="572" y="572"/><use href="#quiet-tile" x="672" y="572"/>
+    <use href="#quiet-tile" x="272" y="672"/><use href="#quiet-tile" x="372" y="672"/><use href="#quiet-tile" x="472" y="672"/><use href="#quiet-tile" x="572" y="672"/><use href="#quiet-tile" x="672" y="672"/>
+  </g>
+
+  <g fill="#F5F5F7">
+    <use href="#active-tile" x="268" y="268"/>
+    <use href="#active-tile" x="268" y="368"/>
+    <use href="#active-tile" x="268" y="468"/>
+    <use href="#active-tile" x="268" y="568"/>
+    <use href="#active-tile" x="368" y="568"/>
+    <use href="#active-tile" x="468" y="568"/>
+  </g>
+
+  <g fill="#0A84FF">
+    <use href="#active-tile" x="468" y="368"/>
+    <use href="#active-tile" x="568" y="368"/>
+    <use href="#active-tile" x="668" y="368"/>
+    <use href="#active-tile" x="668" y="468"/>
+    <use href="#active-tile" x="668" y="568"/>
+    <use href="#active-tile" x="668" y="668"/>
+  </g>
+</svg>

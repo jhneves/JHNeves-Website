@@ -3,3 +3,7 @@
 # unchanged, so this is cheap). Scoped to /wingman/* only; the rest of the site is untouched.
 /wingman/*
   Cache-Control: no-cache
+
+/latch/downloads/*
+  Cache-Control: public, max-age=31536000, immutable
+  Content-Disposition: attachment

@@ -45,8 +45,9 @@ PUBLIC_DIRS = ["assets"]
 
 # Optional dirs copied verbatim into the bundle when present (skipped if absent).
 #   wingman/   -> the WebGL teaser, served at /wingman
+#   latch/     -> the Latch product page, served at /latch
 #   functions/ -> Cloudflare Pages Functions (the waitlist capture API)
-OPTIONAL_DIRS = ["wingman", "functions"]
+OPTIONAL_DIRS = ["wingman", "latch", "functions"]
 
 # Optional root files copied verbatim into the bundle when present (e.g. Cloudflare Pages
 # _headers / _redirects). Skipped silently if absent.
@@ -344,7 +345,7 @@ def admin_token(args_token: str | None = None) -> str:
     return str(args_token or os.environ.get("JHWEB_ADMIN_TOKEN") or os.environ.get("ADMIN_TOKEN") or "").strip()
 
 
-def handle_wingman_signups(args: argparse.Namespace) -> int:
+def handle_product_signups(args: argparse.Namespace, *, product: str, endpoint_path: str) -> int:
     token = admin_token(args.token)
     if not token:
         print("Missing admin token. Pass --token or set JHWEB_ADMIN_TOKEN or ADMIN_TOKEN.", file=sys.stderr)
@@ -358,7 +359,7 @@ def handle_wingman_signups(args: argparse.Namespace) -> int:
         print("Site URL must include a scheme, such as https://jhneves.com.", file=sys.stderr)
         return 2
 
-    endpoint = f"{base_url.rstrip('/')}/api/signups"
+    endpoint = f"{base_url.rstrip('/')}{endpoint_path}"
     request = urllib.request.Request(
         endpoint,
         headers={
@@ -395,13 +396,29 @@ def handle_wingman_signups(args: argparse.Namespace) -> int:
         except OSError as exc:
             print(f"Could not write {output_path}: {exc}", file=sys.stderr)
             return 1
-        print(f"Wrote Wingman signups CSV to {output_path}.")
+        print(f"Wrote {product} signups CSV to {output_path}.")
         return 0
 
     sys.stdout.buffer.write(csv_data)
     if not csv_data.endswith(b"\n"):
         sys.stdout.buffer.write(b"\n")
     return 0
+
+
+def handle_wingman_signups(args: argparse.Namespace) -> int:
+    return handle_product_signups(
+        args,
+        product="Wingman",
+        endpoint_path="/api/signups",
+    )
+
+
+def handle_latch_signups(args: argparse.Namespace) -> int:
+    return handle_product_signups(
+        args,
+        product="Latch",
+        endpoint_path="/api/latch-signups",
+    )
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -453,6 +470,39 @@ def build_parser() -> argparse.ArgumentParser:
     signups_parser.add_argument("--timeout", type=float, default=30.0, help="Request timeout in seconds.")
     signups_parser.add_argument("--user-agent", default=DEFAULT_USER_AGENT, help=argparse.SUPPRESS)
     signups_parser.set_defaults(func=handle_wingman_signups)
+
+    latch_parser = subparsers.add_parser("latch", help="Manage Latch product data.")
+    latch_subparsers = latch_parser.add_subparsers(dest="latch_command", required=True)
+
+    latch_signups_parser = latch_subparsers.add_parser(
+        "signups",
+        help="Fetch Latch update-list signups as CSV.",
+    )
+    latch_signups_parser.add_argument(
+        "--token",
+        help="Admin token. Defaults to JHWEB_ADMIN_TOKEN or ADMIN_TOKEN.",
+    )
+    latch_signups_parser.add_argument(
+        "--url",
+        help="Site origin to query. Defaults to production_url, then pages_domain.",
+    )
+    latch_signups_parser.add_argument(
+        "--output",
+        "-o",
+        help="Write CSV to a file instead of stdout.",
+    )
+    latch_signups_parser.add_argument(
+        "--timeout",
+        type=float,
+        default=30.0,
+        help="Request timeout in seconds.",
+    )
+    latch_signups_parser.add_argument(
+        "--user-agent",
+        default=DEFAULT_USER_AGENT,
+        help=argparse.SUPPRESS,
+    )
+    latch_signups_parser.set_defaults(func=handle_latch_signups)
 
     publish_parser = subparsers.add_parser("publish", help="Build and deploy the site to Cloudflare Pages.")
     publish_parser.add_argument("--skip-deploy", action="store_true", help="Stop after building dist/.")

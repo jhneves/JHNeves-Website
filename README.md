@@ -18,6 +18,7 @@ Common commands:
 ./jhweb site build
 ./jhweb site upload
 ./jhweb wingman signups
+./jhweb latch signups
 ```
 
 One-time Cloudflare setup:
@@ -41,3 +42,12 @@ JHWEB_ADMIN_TOKEN=... ./jhweb wingman signups --output waitlist.csv
 ```
 
 The command uses `production_url` from [`.jhweb.json`](./.jhweb.json) by default. Use `--url` to query the Pages domain or a local preview instead.
+
+## Latch beta-download signups
+
+Latch asks for one email address, stores the signup under a dedicated prefix in the site's Cloudflare KV binding, then streams the beta DMG immediately. The public DMG route is blocked so the download remains behind the form. Fetch the CSV with the same admin token:
+
+```bash
+JHWEB_ADMIN_TOKEN=... ./jhweb latch signups
+JHWEB_ADMIN_TOKEN=... ./jhweb latch signups --output latch-signups.csv
+```

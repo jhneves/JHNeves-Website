@@ -1,14 +1,8 @@
-// Cloudflare Pages Function: GET /api/signups -> CSV of all signups.
-// Preferred auth: Authorization: Bearer YOUR_SECRET.
+// Cloudflare Pages Function:  GET /api/signups?token=YOUR_SECRET  ->  CSV of all signups.
 // Protected by env var ADMIN_TOKEN so it isn't public. Reads from KV (binding: WAITLIST).
 export async function onRequestGet({ request, env }) {
   const url = new URL(request.url);
-  const authHeader = request.headers.get("authorization") || "";
-  const bearerToken = authHeader.match(/^Bearer\s+(.+)$/i)?.[1] || "";
-  const queryToken = url.searchParams.get("token") || "";
-  const validToken = env.ADMIN_TOKEN && (bearerToken === env.ADMIN_TOKEN || queryToken === env.ADMIN_TOKEN);
-
-  if (!validToken) {
+  if (!env.ADMIN_TOKEN || url.searchParams.get("token") !== env.ADMIN_TOKEN) {
     return new Response("unauthorized", { status: 401 });
   }
   if (!env.WAITLIST) return new Response("no KV binding", { status: 500 });
