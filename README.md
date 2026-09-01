@@ -41,6 +41,3 @@ JHWEB_ADMIN_TOKEN=... ./jhweb wingman signups --output waitlist.csv
 ```
 
 The command uses `production_url` from [`.jhweb.json`](./.jhweb.json) by default. Use `--url` to query the Pages domain or a local preview instead.
-
-Foldspell now lives in its own repository and is served from
-`https://foldspell.com`. This site keeps only the `/latch` redirect.
