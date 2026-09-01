@@ -1,5 +1,5 @@
-/latch/support /latch/ 301
-/latch/support/ /latch/ 301
-/latch/support/* /latch/ 301
+/latch https://foldspell.com/ 301
+/latch/ https://foldspell.com/ 301
+/latch/* https://foldspell.com/:splat 301
 /ai-harness /wingman/ 301
 /ai-harness.html /wingman/ 301
